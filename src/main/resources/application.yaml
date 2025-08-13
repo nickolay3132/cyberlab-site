@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: cyberlab-site
+
+  datasource:
+    url: jdbc:${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        default_schema: test
+
+  liquibase:
+    enabled: true
+    change-log: classpath:/db/changelog/db.changelog-master.yaml
+    default-schema: test
+    liquibase-schema: test
+
+  thymeleaf:
+    cache: false
+
+  devtools:
+    restart:
+      enabled: true
+    livereload:
+      enabled: true
+
