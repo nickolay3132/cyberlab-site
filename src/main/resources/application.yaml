@@ -13,13 +13,13 @@ spring:
     show-sql: true
     properties:
       hibernate:
-        default_schema: test
+        default_schema: ${DB_SCHEMA}
 
   liquibase:
     enabled: true
     change-log: classpath:/db/changelog/db.changelog-master.yaml
-    default-schema: test
-    liquibase-schema: test
+    default-schema: ${DB_SCHEMA}
+    liquibase-schema: ${DB_SCHEMA}
 
   thymeleaf:
     cache: false
