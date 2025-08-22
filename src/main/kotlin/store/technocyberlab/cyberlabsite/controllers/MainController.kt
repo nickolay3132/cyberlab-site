@@ -44,6 +44,6 @@ class MainController (
             "requirements" to requirementsSection,
             "cta" to ctaSection
         ))
-        return "main"
+        return "pages/main"
     }
 }

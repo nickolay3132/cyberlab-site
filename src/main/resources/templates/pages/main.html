@@ -1,14 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head th:replace="~{base/head :: head(title='CyberLab - Educational Cyber Polygon')}">
     <title>CyberLab - Educational Cyber Polygon</title>
-    <link rel="stylesheet" th:href="@{/css/main.css}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-<header th:replace="~{fragments/header :: main-header}"></header>
+<header th:replace="~{base/header :: main-header}"></header>
 
 <th:block th:if="${sections['features']}">
     <section
@@ -64,32 +60,7 @@
     </section>
 </th:block>
 
-
-<!-- Footer -->
-<footer>
-    <div class="container">
-        <div class="footer-content">
-            <div class="footer-logo">
-                <span class="logo-icon"><i class="fas fa-shield-alt"></i></span>
-                <span class="logo-text">CyberLab</span>
-            </div>
-            <div class="footer-links">
-                <a href="#">Documentation</a>
-                <a href="#">GitHub</a>
-                <a href="#">License</a>
-                <a href="#">Contact</a>
-            </div>
-            <div class="footer-social">
-                <a href="#"><i class="fab fa-github"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-discord"></i></a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 CyberLab. All rights reserved. Licensed under MIT.</p>
-        </div>
-    </div>
-</footer>
+<footer th:replace="~{base/footer :: main-footer}"></footer>
 
 <script th:src="@{/js/main.js}"></script>
 </body>
