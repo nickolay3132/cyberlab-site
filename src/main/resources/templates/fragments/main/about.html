@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About</title>
+</head>
+<body>
+<section th:fragment="about(title, subtitle, image, aboutItems)" id="about" class="about">
+  <div class="container">
+    <div class="about-content">
+      <div class="about-text">
+        <h2 th:text="${title}">Title</h2>
+        <p th:text="${subtitle}">Subtitle</p>
+        <ul class="about-list">
+          <li th:each="aboutItem : ${aboutItems}">
+            <i th:class="'fas fa-' + ${aboutItem.iconCode}"></i>
+            <span th:text="${aboutItem.title}">About Item Title</span>
+          </li>
+        </ul>
+      </div>
+      <div class="about-image">
+        <img th:src="${image}" alt="CyberLab Network Diagram">
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+</html>

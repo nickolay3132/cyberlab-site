@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberLab - Educational Cyber Polygon</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<header th:replace="~{fragments/header :: main-header}"></header>
+
+<th:block th:if="${sections['features']}">
+    <section
+            th:replace="~{fragments/main/features :: features(
+            title=${sections['features'].title},
+            features=${sections['features'].items}
+        )}"
+            id="features"
+    ></section>
+</th:block>
+
+<th:block th:if="${sections['about']}">
+    <section
+            th:replace="~{fragments/main/about :: about(
+                title=${sections['about'].title},
+                subtitle=${sections['about'].subtitle},
+                image=${sections['about'].image},
+                aboutItems=${sections['about'].items}
+            )}"
+            id="about"
+    ></section>
+</th:block>
+
+<th:block th:if="${sections['clmt']}">
+    <section
+            th:replace="~{fragments/main/clmt :: clmt(
+                title=${sections['clmt'].title},
+                subtitle=${sections['clmt'].subtitle},
+                clmtFeatures=${sections['clmt'].clmtFeatures},
+                codeSamples=${sections['clmt'].codeSamples}
+            )}"
+            id="clmt"
+    ></section>
+</th:block>
+
+<th:block th:if="${sections['requirements']}">
+    <section
+            th:replace="~{fragments/main/requirements :: requirements(
+                title=${sections['requirements'].title},
+                table=${sections['requirements'].table}
+            )}"
+            id="requirements"
+    ></section>
+</th:block>
+
+<th:block th:if="${sections['cta']}">
+    <section class="cta">
+        <div class="container">
+            <h2 th:text="${sections['cta'].title}">CTA Title</h2>
+            <p th:text="${sections['cta'].subtitle}">CTA Subtitle</p>
+            <a th:href="@{/download}" th:text="${sections['cta'].downloadLabel}" class="btn-primary">CTA Link Label</a>
+        </div>
+    </section>
+</th:block>
+
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <span class="logo-icon"><i class="fas fa-shield-alt"></i></span>
+                <span class="logo-text">CyberLab</span>
+            </div>
+            <div class="footer-links">
+                <a href="#">Documentation</a>
+                <a href="#">GitHub</a>
+                <a href="#">License</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-discord"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 CyberLab. All rights reserved. Licensed under MIT.</p>
+        </div>
+    </div>
+</footer>
+
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

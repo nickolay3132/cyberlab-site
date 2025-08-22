@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Header</title>
+</head>
+<body>
+<header th:fragment="main-header" class="hero">
+    <div class="container">
+        <nav class="navbar">
+            <div class="logo">
+                <span class="logo-icon"><i class="fas fa-shield-alt"></i></span>
+                <span class="logo-text">CyberLab</span>
+            </div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#about">About</a>
+                <a href="#clmt">CLMT</a>
+                <a th:href="@{/download}" class="btn-primary">Download</a>
+            </div>
+        </nav>
+        <div class="hero-content">
+            <h1>Your Virtual Cybersecurity Training Ground</h1>
+            <p class="subtitle">Realistic corporate network simulation with
+                intentionally vulnerable configurations for hands-on cybersecurity training</p>
+            <div class="cta-buttons">
+                <a th:href="@{/download}" class="btn-primary">Get CyberLab</a>
+                <a href="#features" class="btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </div>
+</header>
+</body>
+</html>

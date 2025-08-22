@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Requirements</title>
+</head>
+<body>
+<section th:fragment="requirements(title, table)" id="requirements" class="requirements">
+  <div class="container">
+    <h2 th:text="${title}">Requirements Title</h2>
+
+    <div class="requirements-table">
+      <table>
+        <thead>
+          <tr>
+            <th
+                    th:each="th_title : ${table.head}"
+                    th:text="${th_title}"
+            >Table Title</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr th:each="row : ${table.body}">
+            <td th:text="${row.component}">Component</td>
+
+            <td th:if="${row.colspan == 1}" th:text="${row.minimum}">Minimum</td>
+            <td th:if="${row.colspan == 1}" th:text="${row.recommended}">Recommended</td>
+
+            <td th:if="${row.colspan > 1}" th:colspan="${row.colspan}" th:text="${row.minimum}">Merged</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+</body>
+</html>

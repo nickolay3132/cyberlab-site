@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>features</title>
+</head>
+<body>
+<section th:fragment="features(title, features)" id="features" class="features">
+    <div class="container">
+        <h2 th:text="${title}">Features Title</h2>
+        <div class="features-grid">
+            <div th:each="feature : ${features}" class="feature-card">
+                <div class="feature-icon">
+                    <i th:class="'fas fa-' + ${feature.iconCode}"></i>
+                </div>
+                <h3 th:text="${feature.title}">Title</h3>
+                <p th:text="${feature.description}">Description</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

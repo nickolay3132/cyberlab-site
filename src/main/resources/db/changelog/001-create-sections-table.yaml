@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1755104775971-1
+      author: nickolay
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            tableName: sections
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_sections
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: page
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: section
+                  type: VARCHAR(255)
+              - column:
+                  name: data
+                  type: jsonb
+
