@@ -38,3 +38,6 @@ out/
 
 ### Kotlin ###
 .kotlin
+
+### SQL Scripts ###
+sql/
