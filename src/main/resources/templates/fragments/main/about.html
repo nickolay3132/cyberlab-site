@@ -5,21 +5,21 @@
     <title>About</title>
 </head>
 <body>
-<section th:fragment="about(title, subtitle, image, aboutItems)" id="about" class="about">
+<section th:fragment="section" id="about" class="about">
   <div class="container">
     <div class="about-content">
       <div class="about-text">
-        <h2 th:text="${title}">Title</h2>
-        <p th:text="${subtitle}">Subtitle</p>
+        <h2 th:text="${about.title}">Title</h2>
+        <p th:text="${about.subtitle}">Subtitle</p>
         <ul class="about-list">
-          <li th:each="aboutItem : ${aboutItems}">
+          <li th:each="aboutItem : ${about.items}">
             <i th:class="'fas fa-' + ${aboutItem.iconCode}"></i>
             <span th:text="${aboutItem.title}">About Item Title</span>
           </li>
         </ul>
       </div>
       <div class="about-image">
-        <img th:src="${image}" alt="CyberLab Network Diagram">
+        <img th:src="${about.image}" alt="CyberLab Network Diagram">
       </div>
     </div>
   </div>

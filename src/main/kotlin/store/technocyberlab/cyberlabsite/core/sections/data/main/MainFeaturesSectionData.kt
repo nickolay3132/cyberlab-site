@@ -1,12 +1,13 @@
-package store.technocyberlab.cyberlabsite.core.sections.main
+package store.technocyberlab.cyberlabsite.core.sections.data.main
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import store.technocyberlab.cyberlabsite.core.sections.SectionData
+import store.technocyberlab.cyberlabsite.core.sections.data.SectionData
+import store.technocyberlab.cyberlabsite.core.sections.traits.HasTitle
 
 data class MainFeaturesSectionData(
-    val title: String,
+    override val title: String,
     val items: List<Item>
-) : SectionData {
+) : SectionData, HasTitle {
     data class Item(
         @JsonProperty("icon_code")
         val iconCode: String,

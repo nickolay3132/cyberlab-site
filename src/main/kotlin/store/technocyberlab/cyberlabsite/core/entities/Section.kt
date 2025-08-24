@@ -3,8 +3,8 @@ package store.technocyberlab.cyberlabsite.core.entities
 import jakarta.persistence.*
 import org.hibernate.annotations.JdbcTypeCode
 import org.hibernate.type.SqlTypes
-import store.technocyberlab.cyberlabsite.core.sections.SectionData
-import store.technocyberlab.cyberlabsite.core.sections.SectionTypeRegistry
+import store.technocyberlab.cyberlabsite.core.sections.data.SectionData
+import store.technocyberlab.cyberlabsite.core.sections.data.SectionTypeRegistry
 
 @Entity
 @Table(name = "sections")

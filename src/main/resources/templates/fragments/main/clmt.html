@@ -5,20 +5,20 @@
     <title>CLMT</title>
 </head>
 <body>
-<section th:fragment="clmt(title, subtitle, clmtFeatures, codeSamples)" id="clmt" class="clmt">
+<section th:fragment="section" id="clmt" class="clmt">
     <div class="container">
-        <h2 th:text="${title}">Title</h2>
-        <p th:text="${subtitle}" class="section-description">Subtitle</p>
+        <h2 th:text="${clmt.title}">Title</h2>
+        <p th:text="${clmt.subtitle}" class="section-description">Subtitle</p>
 
         <div class="clmt-features">
-            <div th:each="feat : ${clmtFeatures}" class="clmt-feature">
+            <div th:each="feat : ${clmt.clmtFeatures}" class="clmt-feature">
                 <h3><i th:class="'fas fa-' + ${feat.iconCode}"></i><span th:text="${feat.title}">Feature Title</span></h3>
                 <p th:text="${feat.description}">Feature Description</p>
             </div>
         </div>
 
         <div class="code-samples">
-            <div th:each="sample : ${codeSamples}" class="code-sample">
+            <div th:each="sample : ${clmt.codeSamples}" class="code-sample">
                 <h4 th:text="${sample.title}">Code Sample Title</h4>
                 <code th:utext="${sample.code}">Code Sample Description</code>
             </div>

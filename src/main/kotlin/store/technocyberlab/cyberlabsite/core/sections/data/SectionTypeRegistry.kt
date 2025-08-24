@@ -1,13 +1,13 @@
-package store.technocyberlab.cyberlabsite.core.sections
+package store.technocyberlab.cyberlabsite.core.sections.data
 
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
-import store.technocyberlab.cyberlabsite.core.sections.main.MainAboutSectionData
-import store.technocyberlab.cyberlabsite.core.sections.main.MainClmtSectionData
-import store.technocyberlab.cyberlabsite.core.sections.main.MainCtaSectionData
-import store.technocyberlab.cyberlabsite.core.sections.main.MainFeaturesSectionData
-import store.technocyberlab.cyberlabsite.core.sections.main.MainRequirementsSectionData
+import store.technocyberlab.cyberlabsite.core.sections.data.main.MainAboutSectionData
+import store.technocyberlab.cyberlabsite.core.sections.data.main.MainClmtSectionData
+import store.technocyberlab.cyberlabsite.core.sections.data.main.MainCtaSectionData
+import store.technocyberlab.cyberlabsite.core.sections.data.main.MainFeaturesSectionData
+import store.technocyberlab.cyberlabsite.core.sections.data.main.MainRequirementsSectionData
 
 object SectionTypeRegistry {
     private val objectMapper = jacksonObjectMapper()

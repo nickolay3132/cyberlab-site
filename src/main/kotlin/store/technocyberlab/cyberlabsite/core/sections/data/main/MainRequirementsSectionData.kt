@@ -1,11 +1,12 @@
-package store.technocyberlab.cyberlabsite.core.sections.main
+package store.technocyberlab.cyberlabsite.core.sections.data.main
 
-import store.technocyberlab.cyberlabsite.core.sections.SectionData
+import store.technocyberlab.cyberlabsite.core.sections.data.SectionData
+import store.technocyberlab.cyberlabsite.core.sections.traits.HasTitle
 
 data class MainRequirementsSectionData(
-    val title: String,
+    override val title: String,
     val table: RequirementsTable
-) : SectionData {
+) : SectionData, HasTitle {
     data class RequirementsTable(
         val head: List<String>,
         val body: List<RequirementsTableNode>

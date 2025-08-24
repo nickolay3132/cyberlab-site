@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CTA</title>
+</head>
+<body>
+<section th:fragment="section" class="cta">
+    <div class="container">
+        <h2 th:text="${cta.title}">CTA Title</h2>
+        <p th:text="${cta.subtitle}">CTA Subtitle</p>
+        <a th:href="@{/download}" th:text="${cta.downloadLabel}" class="btn-primary">CTA Link Label</a>
+    </div>
+</section>
+</body>
+</html>

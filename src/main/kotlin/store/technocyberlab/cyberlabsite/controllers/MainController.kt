@@ -4,11 +4,12 @@ import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 import store.technocyberlab.cyberlabsite.core.repositories.SectionRepository
-import store.technocyberlab.cyberlabsite.core.sections.main.MainAboutSectionData
-import store.technocyberlab.cyberlabsite.core.sections.main.MainClmtSectionData
-import store.technocyberlab.cyberlabsite.core.sections.main.MainCtaSectionData
-import store.technocyberlab.cyberlabsite.core.sections.main.MainFeaturesSectionData
-import store.technocyberlab.cyberlabsite.core.sections.main.MainRequirementsSectionData
+import store.technocyberlab.cyberlabsite.core.sections.data.main.MainAboutSectionData
+import store.technocyberlab.cyberlabsite.core.sections.data.main.MainClmtSectionData
+import store.technocyberlab.cyberlabsite.core.sections.data.main.MainCtaSectionData
+import store.technocyberlab.cyberlabsite.core.sections.data.main.MainFeaturesSectionData
+import store.technocyberlab.cyberlabsite.core.sections.data.main.MainRequirementsSectionData
+import store.technocyberlab.cyberlabsite.core.sections.render.page
 
 @Controller
 class MainController (
@@ -37,13 +38,38 @@ class MainController (
             .findByPageAndSection("main", "cta")
             ?.typedData() as? MainCtaSectionData
 
-        model.addAttribute("sections", mapOf(
-            "features" to featuresSection,
-            "about" to aboutSection,
-            "clmt" to clmtSection,
-            "requirements" to requirementsSection,
-            "cta" to ctaSection
-        ))
-        return "pages/main"
+        return page(model) {
+            title = "Test"
+
+            section {
+                name = "features"
+                template = "fragments/main/features"
+                data = featuresSection
+            }
+
+            section {
+                name = "about"
+                template = "fragments/main/about"
+                data = aboutSection
+            }
+
+            section {
+                name = "clmt"
+                template = "fragments/main/clmt"
+                data = clmtSection
+            }
+
+            section {
+                name = "requirements"
+                template = "fragments/main/requirements"
+                data = requirementsSection
+            }
+
+            section {
+                name = "cta"
+                template = "fragments/main/cta"
+                data = ctaSection
+            }
+        }
     }
 }

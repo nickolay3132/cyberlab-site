@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{base/head :: head(title=${title})}">
+<!--    'CyberLab - Educational Cyber Polygon-->
+    <title>Sections Layout</title>
+</head>
+<body>
+<header th:replace="~{base/header :: main-header}"></header>
+
+<div th:each="template : ${templates}">
+    <div th:replace="~{${template} :: section}"></div>
+</div>
+
+<footer th:replace="~{base/footer :: main-footer}"></footer>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>
