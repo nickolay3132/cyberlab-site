@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Release Card</title>
+</head>
+<body>
+<div th:fragment="card(version, tag, date, notes, size, link)" class="card release-card" th:classappend="${tag.toLowerCase()}">
+    <h3>
+        <span th:text="${version}">Version</span>
+        <span th:text="${tag}" class="tag">Tag</span>
+    </h3>
+    <p class="date">Released: <span th:text="${date}">Release Date</span></p>
+    <p class="notes" th:text="${notes}">Notes</p>
+    <p class="size">Size: <span th:text="${size}">Release Size</span></p>
+    <a th:href="${link}" class="btn-primary" style="text-align: center">Download</a>
+</div>
+</body>
+</html>

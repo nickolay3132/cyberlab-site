@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:fragment="head(title)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}">Layout</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<th:block th:fragment="navigation">
+    <nav class="navbar sticky">
+        <a th:href="@{/}" class="logo">
+            <span class="logo-icon"><i class="fas fa-shield-alt"></i></span>
+            <span class="logo-text">CyberLab</span>
+        </a>
+
+        <div class="nav-links">
+            <a th:href="@{/}">Home</a>
+            <a th:href="@{/download}">Download</a>
+            <a th:href="@{/scenarios}">Scenarios</a>
+            <a th:href="@{/docs}" class="btn-primary">Docs</a>
+        </div>
+    </nav>
+
+    <div style="height: 82px; color: transparent"></div>
+</th:block>
+
+
+<header th:fragment="hero" class="hero">
+    <div class="container">
+        <nav class="navbar">
+            <a th:href="@{/}" class="logo">
+                <span class="logo-icon"><i class="fas fa-shield-alt"></i></span>
+                <span class="logo-text">CyberLab</span>
+            </a>
+
+            <div class="nav-links">
+                <a th:href="@{/}">Home</a>
+                <a th:href="@{/download}">Download</a>
+                <a th:href="@{/scenarios}">Scenarios</a>
+                <a th:href="@{/docs}" class="btn-primary">Docs</a>
+            </div>
+        </nav>
+        <div class="hero-content">
+            <h1>Your Virtual Cybersecurity Training Ground</h1>
+            <p class="subtitle">Realistic corporate network simulation with
+                intentionally vulnerable configurations for hands-on cybersecurity training</p>
+            <div class="cta-buttons">
+                <a th:href="@{/download}" class="btn-primary">Get CyberLab</a>
+                <a href="#features" class="btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<footer th:fragment="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <span class="logo-icon"><i class="fas fa-shield-alt"></i></span>
+                <span class="logo-text">CyberLab</span>
+            </div>
+            <div class="footer-links">
+                <a href="#">Documentation</a>
+                <a href="#">GitHub</a>
+                <a href="#">License</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-discord"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 CyberLab. All rights reserved. Licensed under MIT.</p>
+        </div>
+    </div>
+</footer>
+
+<th:block th:fragment="scripts">
+    <script th:src="@{/js/main.js}"></script>
+</th:block>
+
+</body>
+</html>

@@ -8,8 +8,8 @@
 <section th:fragment="section" id="features" class="features">
     <div class="container">
         <h2 th:text="${features.title}">Features Title</h2>
-        <div class="features-grid">
-            <div th:each="feature : ${features.items}" class="feature-card">
+        <div class="grid">
+            <div th:each="feature : ${features.items}" class="card feature-card">
                 <div class="feature-icon">
                     <i th:class="'fas fa-' + ${feature.iconCode}"></i>
                 </div>

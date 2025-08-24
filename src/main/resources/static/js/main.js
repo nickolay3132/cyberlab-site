@@ -51,4 +51,13 @@ document.addEventListener('DOMContentLoaded', function() {
     featureCards.forEach(card => {
         observer.observe(card);
     });
+
+    document.querySelector('#copy-license-text').addEventListener('click', () => {
+        const text = document.getElementById("license-text").innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            console.log("License copied")
+        }).catch(err => {
+            console.error("Copy failed", err);
+        });
+    })
 });

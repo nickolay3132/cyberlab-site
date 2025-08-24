@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{layout :: head(title='Download CLMT')}">
+    <title>Download CLMT</title>
+</head>
+<body>
+<header th:replace="~{layout :: navigation}"></header>
+
+<section th:fragment="section" class="releases">
+    <div class="container">
+        <th:block
+                th:replace="~{fragments/download/download-layout :: header(
+                    title='CyberLab Releases',
+                    subtitle='All builds are cross-platform and available on GitHub. Choose the version that suits your needs: stable, preview, or legacy.'
+                )}"
+        ></th:block>
+
+        <div class="grid">
+            <div
+                    th:replace="~{fragments/download/release-card :: card(
+                        version='v2.3.0',
+                        tag='Stable',
+                        date='August 20, 2025',
+                        notes='Improved DSL composition, scoped styles, and registry mapping.',
+                        size='14.2 MB',
+                        link='https://github.com/your-org/cyberlab/releases/tag/v2.3.0'
+                    )}"
+            ></div>
+
+            <div
+                    th:replace="~{fragments/download/release-card :: card(
+                        version='v2.4.0-beta',
+                        tag='Pre-Release',
+                        date='August 22, 2025',
+                        notes='Experimental support for dynamic section injection and live reload.',
+                        size='15.1 MB',
+                        link='https://github.com/your-org/cyberlab/releases/tag/v2.4.0-beta'
+                    )}"
+            ></div>
+
+            <div class="card release-card stable">
+                <h3>v2.2.1 <span class="tag">Stable</span></h3>
+                <p class="date">Released: July 10, 2025</p>
+                <p class="notes">Bug fixes and performance improvements in template mapping.</p>
+                <p class="size">Size: 13.8 MB</p>
+                <a href="https://github.com/your-org/cyberlab/releases/tag/v2.2.1" class="btn-primary">Download</a>
+            </div>
+
+            <div
+                    th:replace="~{fragments/download/release-card :: card(
+                        version='v1.9.5',
+                        tag='Legacy',
+                        date='March 3, 2025',
+                        notes='Legacy build with basic DSL and static templates.',
+                        size='11.4 MB',
+                        link='https://github.com/your-org/cyberlab/releases/tag/v1.9.5'
+                    )}"
+            ></div>
+        </div>
+
+        <div
+                th:replace="~{fragments/download/download-layout :: footer(
+                    hint='💡 To install, download the archive and run <code>cyberlab start</code> from the root directory.',
+                    link='https://github.com/your-org/cyberlab/releases',
+                    browseLabel='Browse All Releases'
+                )}"
+        ></div>
+    </div>
+</section>
+
+<section
+        th:replace="~{fragments/download/license :: license(
+            title='License',
+            text=${licenseText}
+        )}"
+></section>
+
+<footer th:replace="~{layout :: footer}"></footer>
+
+<script th:replace="~{layout :: scripts}"></script>
+</body>
+</html>

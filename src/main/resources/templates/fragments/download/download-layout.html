@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Download Header</title>
+</head>
+<body>
+<th:block th:fragment="header(title, subtitle)">
+    <h2 th:text="${title}">Title</h2>
+    <p th:text="${subtitle}" class="section-description" style="text-align: left">Subtitle</p>
+</th:block>
+
+<div th:fragment="footer(hint, link, browseLabel)" class="release-footer">
+    <p th:utext="${hint}" class="install-hint"></p>
+    <a th:href="${link}" th:text="${browseLabel}" class="btn-secondary"></a>
+</div>
+</body>
+</html>

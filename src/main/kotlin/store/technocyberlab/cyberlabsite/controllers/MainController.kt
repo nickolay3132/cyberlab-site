@@ -10,7 +10,6 @@ import store.technocyberlab.cyberlabsite.core.sections.data.main.MainClmtSection
 import store.technocyberlab.cyberlabsite.core.sections.data.main.MainCtaSectionData
 import store.technocyberlab.cyberlabsite.core.sections.data.main.MainFeaturesSectionData
 import store.technocyberlab.cyberlabsite.core.sections.data.main.MainRequirementsSectionData
-import store.technocyberlab.cyberlabsite.page.dsl.page
 
 @Controller
 class MainController (
@@ -39,38 +38,14 @@ class MainController (
             .findByPageAndSection("main", "cta")
             ?.typedData<MainCtaSectionData>()
 
-        return page(model) {
-            title = "CyberLab - Educational Cyber Polygon"
-
-            section {
-                name = "features"
-                template = "fragments/main/features"
-                data = featuresSection
-            }
-
-            section {
-                name = "about"
-                template = "fragments/main/about"
-                data = aboutSection
-            }
-
-            section {
-                name = "clmt"
-                template = "fragments/main/clmt"
-                data = clmtSection
-            }
-
-            section {
-                name = "requirements"
-                template = "fragments/main/requirements"
-                data = requirementsSection
-            }
-
-            section {
-                name = "cta"
-                template = "fragments/main/cta"
-                data = ctaSection
-            }
+        with(model) {
+            addAttribute("features", featuresSection)
+            addAttribute("about", aboutSection)
+            addAttribute("clmt", clmtSection)
+            addAttribute("requirements", requirementsSection)
+            addAttribute("cta", ctaSection)
         }
+
+        return "pages/main"
     }
 }

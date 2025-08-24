@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{layout :: head(title='CyberLab - Educational Cyber Polygon')}">
+    <title>CyberLab - Educational Cyber Polygon</title>
+</head>
+<body>
+<header th:replace="~{layout :: hero}"></header>
+
+<th:block th:if="${features}">
+    <section
+            th:replace="~{fragments/main/features :: section}"
+    ></section>
+</th:block>
+
+<th:block th:if="${about}">
+    <section
+            th:replace="~{fragments/main/about :: section}"
+    ></section>
+</th:block>
+
+<th:block th:if="${clmt}">
+    <section
+            th:replace="~{fragments/main/clmt :: section}"
+    ></section>
+</th:block>
+
+<th:block th:if="${requirements}">
+    <section
+            th:replace="~{fragments/main/requirements :: section}"
+    ></section>
+</th:block>
+
+<th:block th:if="${cta}">
+    <section
+            th:replace="~{fragments/main/cta :: section}"
+    ></section>
+</th:block>
+
+<footer th:replace="~{layout :: footer}"></footer>
+
+<script th:replace="~{layout :: scripts}"></script>
+</body>
+</html>

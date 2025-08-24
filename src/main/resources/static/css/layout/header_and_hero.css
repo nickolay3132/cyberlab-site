@@ -10,7 +10,7 @@
 /* Sticky Navbar */
 .sticky {
     position: fixed;
-    top: 0;
+    top: -1px;
     left: 0;
     right: 0;
     background-color: rgba(30, 58, 138, 0.95);
@@ -52,7 +52,8 @@
     align-items: center;
 }
 
-.nav-links a {
+.nav-links a,
+a.logo {
     color: white;
     text-decoration: none;
     font-weight: 500;

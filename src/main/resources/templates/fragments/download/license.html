@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>License</title>
+</head>
+<body>
+<section th:fragment="license(title, text)" class="license-section">
+    <div class="container">
+        <div class="license-header">
+            <h2 th:text="${title}">License Title</h2>
+            <button class="copy-btn" id="copy-license-text" title="Copy to clipboard">
+                <span><i class="fa-solid fa-copy"></i> Copy</span>
+            </button>
+        </div>
+        <pre th:text="${text}" id="license-text" class="license-text"></pre>
+    </div>
+</section>
+</body>
+</html>
