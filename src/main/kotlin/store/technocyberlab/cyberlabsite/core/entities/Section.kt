@@ -3,8 +3,6 @@ package store.technocyberlab.cyberlabsite.core.entities
 import jakarta.persistence.*
 import org.hibernate.annotations.JdbcTypeCode
 import org.hibernate.type.SqlTypes
-import store.technocyberlab.cyberlabsite.core.sections.data.SectionData
-import store.technocyberlab.cyberlabsite.core.sections.data.SectionTypeRegistry
 
 @Entity
 @Table(name = "sections")
@@ -21,9 +19,5 @@ data class Section(
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(columnDefinition = "jsonb")
     val data: Map<String, Any> = emptyMap()
-) {
-    fun typedData(): SectionData? {
-        val key = "$page:$section"
-        return SectionTypeRegistry.deserialize(key, data)
-    }
-}
+)
+

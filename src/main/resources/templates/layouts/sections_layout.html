@@ -5,13 +5,13 @@
     <title>Sections Layout</title>
 </head>
 <body>
-<header th:replace="~{base/header :: main-header}"></header>
+<header th:replace="~{base/header :: ${header}}"></header>
 
 <div th:each="template : ${templates}">
-    <div th:replace="~{${template} :: section}"></div>
+    <div th:replace="~{${template[0]} :: ${template[1]}}"></div>
 </div>
 
-<footer th:replace="~{base/footer :: main-footer}"></footer>
+<footer th:replace="~{base/footer :: ${footer}}"></footer>
 <script th:src="@{/js/main.js}"></script>
 </body>
 </html>
