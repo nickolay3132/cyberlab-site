@@ -56,6 +56,15 @@ document.addEventListener('DOMContentLoaded', function() {
         const text = document.getElementById("license-text").innerText;
         navigator.clipboard.writeText(text).then(() => {
             console.log("License copied")
+
+            const btn = document.querySelector("#copy-license-text");
+            btn.classList.add("copied");
+            btn.querySelector(".copy-btn-label").innerText = "Copied"
+
+            setTimeout(() => {
+                btn.classList.remove("copied");
+                btn.querySelector(".copy-btn-label").innerText = "Copy"
+            }, 1000);
         }).catch(err => {
             console.error("Copy failed", err);
         });

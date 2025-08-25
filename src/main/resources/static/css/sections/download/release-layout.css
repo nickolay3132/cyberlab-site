@@ -1,0 +1,15 @@
+.releases {
+    padding: 5rem 0;
+    background-color: var(--light-color);
+}
+
+.release-footer {
+    margin-top: 4rem;
+    text-align: center;
+}
+
+.install-hint {
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    color: var(--gray-color);
+}
