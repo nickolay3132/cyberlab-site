@@ -1,0 +1,115 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1756137249903-1
+      author: nickolay
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_attack_types
+                  name: id
+                  type: INT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: label
+                  type: VARCHAR(255)
+              - column:
+                  name: description
+                  type: VARCHAR(255)
+            tableName: attack_types
+  - changeSet:
+      id: 1756137249903-2
+      author: nickolay
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_scenario_steps
+                  name: id
+                  type: UUID
+              - column:
+                  name: scenario_id
+                  type: UUID
+              - column:
+                  constraints:
+                    nullable: false
+                  name: step_index
+                  type: INT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: instruction
+                  type: TEXT
+              - column:
+                  name: expected_flag_hash
+                  type: VARCHAR(255)
+            tableName: scenario_steps
+  - changeSet:
+      id: 1756137249903-3
+      author: nickolay
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_scenarios
+                  name: id
+                  type: UUID
+              - column:
+                  constraints:
+                    nullable: false
+                  name: title
+                  type: VARCHAR(255)
+              - column:
+                  name: description
+                  type: TEXT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: difficulty
+                  type: VARCHAR(255)
+              - column:
+                  name: attack_type_id
+                  type: INT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: is_active
+                  type: BOOLEAN
+            tableName: scenarios
+  - changeSet:
+      id: 1756137249903-4
+      author: nickolay
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: attack_type_id
+            baseTableName: scenarios
+            constraintName: FK_SCENARIOS_ON_ATTACK_TYPE
+            referencedColumnNames: id
+            referencedTableName: attack_types
+  - changeSet:
+      id: 1756137249903-5
+      author: nickolay
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: scenario_id
+            baseTableName: scenario_steps
+            constraintName: FK_SCENARIO_STEPS_ON_SCENARIO
+            referencedColumnNames: id
+            referencedTableName: scenarios
+

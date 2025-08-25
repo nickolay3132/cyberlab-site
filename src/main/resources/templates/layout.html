@@ -15,7 +15,18 @@
             <span class="logo-text">CyberLab</span>
         </a>
 
+        <button class="menu-toggle" aria-label="Toggle menu">
+            <i class="fas fa-bars"></i>
+        </button>
+
         <div class="nav-links">
+            <a th:href="@{/}">Home</a>
+            <a th:href="@{/download}">Download</a>
+            <a th:href="@{/scenarios}">Scenarios</a>
+            <a th:href="@{/docs}" class="btn-primary">Docs</a>
+        </div>
+
+        <div class="nav-dropdown-menu">
             <a th:href="@{/}">Home</a>
             <a th:href="@{/download}">Download</a>
             <a th:href="@{/scenarios}">Scenarios</a>
@@ -35,7 +46,18 @@
                 <span class="logo-text">CyberLab</span>
             </a>
 
+            <button class="menu-toggle" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+
             <div class="nav-links">
+                <a th:href="@{/}">Home</a>
+                <a th:href="@{/download}">Download</a>
+                <a th:href="@{/scenarios}">Scenarios</a>
+                <a th:href="@{/docs}" class="btn-primary">Docs</a>
+            </div>
+
+            <div class="nav-dropdown-menu in-hero">
                 <a th:href="@{/}">Home</a>
                 <a th:href="@{/download}">Download</a>
                 <a th:href="@{/scenarios}">Scenarios</a>

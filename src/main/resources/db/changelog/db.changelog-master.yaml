@@ -3,3 +3,5 @@ databaseChangeLog:
       file: db/changelog/001-create-sections-table.yaml
   - include:
       file: db/changelog/002-create-releases-table.yaml
+  - include:
+      file: db/changelog/003-create-attack_types-scenario_steps-scenarios-tables.yaml

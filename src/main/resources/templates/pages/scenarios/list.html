@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{layout :: head(title='CyberLab - Training Scenarios')}">
+    <title>CyberLab - Training Scenarios</title>
+</head>
+<body>
+<header th:replace="~{layout :: navigation}"></header>
+
+<section class="container" style="padding:5rem 20px">
+    <h2>Training Scenarios</h2>
+    <p class="section-description" style="text-align: left">Search by name, filter by difficulty or attack type, and choose a scenario to begin your hands-on training.</p>
+
+    <div class="scenario-filters">
+        <!-- Search Input -->
+        <div class="form-group">
+            <label for="scenario-search">Scenario Name</label>
+            <div class="floating-placeholder">
+                <input type="text" id="scenario-search" placeholder="🔍 Search by scenario name..." />
+            </div>
+        </div>
+
+        <!-- Dropdowns -->
+        <div class="scenario-selects">
+            <!-- Difficulty -->
+            <div class="form-group">
+                <label for="difficulty-dropdown">Difficulty</label>
+                <div class="dropdown" id="difficulty-dropdown" data-dropdown="difficulty">
+                    <button class="dropdown-toggle" data-toggle>
+                        <span class="dropdown-label">All</span>
+                        <span class="dropdown-arrow">▾</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li data-value="easy">Easy</li>
+                        <li data-value="medium">Medium</li>
+                        <li data-value="hard">Hard</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Attack Type -->
+            <div class="form-group">
+                <label for="attack-dropdown">Attack Type</label>
+                <div class="dropdown" id="attack-dropdown" data-dropdown="attack_type">
+                    <button class="dropdown-toggle" data-toggle>
+                        <span class="dropdown-label">All</span>
+                        <span class="dropdown-arrow">▾</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li data-value="phishing">Phishing</li>
+                        <li data-value="priv_esc">Privilege Escalation</li>
+                        <li data-value="web_exploit">Web Exploitation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Scenario Cards -->
+    <div class="grid">
+        <div th:each="i : ${#numbers.sequence(1, 5)}" class="card scenario-card">
+            <h3>Phishing Simulation</h3>
+            <p>Simulate a phishing attack using a fake corporate login portal.</p>
+            <div class="scenario-meta">
+                <span class="badge badge-easy">Easy</span>
+                <span class="badge badge-phishing">Phishing</span>
+            </div>
+            <a href="/scenarios/phishing-sim" class="btn-primary" style="margin-top:1rem; transform: none">Start Scenario</a>
+        </div>
+
+        <div th:each="i : ${#numbers.sequence(1, 5)}" class="card scenario-card">
+            <h3>Privilege Escalation Lab</h3>
+            <p>Explore Linux vulnerabilities for privilege escalation.</p>
+            <div class="scenario-meta">
+                <span class="badge badge-medium">Medium</span>
+                <span class="badge badge-priv_esc">Privilege Escalation</span>
+            </div>
+            <a href="/scenarios/priv-esc-lab" class="btn-primary" style="margin-top:1rem; transform: none">Start Scenario</a>
+        </div>
+
+        <!-- Add more scenario cards as needed -->
+    </div>
+</section>
+
+<footer th:replace="~{layout :: footer}"></footer>
+
+<script th:replace="~{layout :: scripts}"></script>
+
+</body>
+</html>
