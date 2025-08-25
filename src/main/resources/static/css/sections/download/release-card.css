@@ -35,6 +35,10 @@
     background-color: #6c757d;
 }
 
+.release-card.latest .tag {
+    background-color: var(--secondary-color);
+}
+
 .release-card .btn-primary:hover {
     transform: none;
 }

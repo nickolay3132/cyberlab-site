@@ -3,6 +3,22 @@
     background-color: var(--light-color);
 }
 
+.no-releases {
+    background-color: #f0f4f8;
+    border: 1px dashed #b0bec5;
+    padding: 1.2rem;
+    margin: 2rem 0;
+    text-align: center;
+    font-style: italic;
+    color: #607d8b;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.no-releases p {
+    margin: 0;
+}
+
 .release-footer {
     margin-top: 4rem;
     text-align: center;

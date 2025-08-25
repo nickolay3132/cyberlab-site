@@ -11,10 +11,11 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
-    show-sql: true
+    show-sql: false
     properties:
       hibernate:
         default_schema: ${DB_SCHEMA}
+    open-in-view: true
 
   liquibase:
     enabled: true

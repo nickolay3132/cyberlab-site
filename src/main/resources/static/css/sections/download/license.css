@@ -17,22 +17,8 @@
 }
 
 .copy-btn {
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 0.4rem;
-    font-size: 0.85rem;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
     transition: transform 0.1s ease, background-color 0.3s ease;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
-}
-
-.copy-btn:hover {
-    background-color: var(--primary-dark);
 }
 
 .copy-btn:active {

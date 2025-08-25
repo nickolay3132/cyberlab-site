@@ -3,6 +3,9 @@ package store.technocyberlab.cyberlabsite.core.sections.data
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
+import store.technocyberlab.cyberlabsite.core.sections.data.download.DownloadFooterSectionData
+import store.technocyberlab.cyberlabsite.core.sections.data.download.DownloadHeaderSectionData
+import store.technocyberlab.cyberlabsite.core.sections.data.download.DownloadLicenseSectionData
 import store.technocyberlab.cyberlabsite.core.sections.data.main.MainAboutSectionData
 import store.technocyberlab.cyberlabsite.core.sections.data.main.MainClmtSectionData
 import store.technocyberlab.cyberlabsite.core.sections.data.main.MainCtaSectionData
@@ -20,6 +23,10 @@ object SectionTypeRegistry {
         "main:clmt" to MainClmtSectionData::class.java,
         "main:requirements" to MainRequirementsSectionData::class.java,
         "main:cta" to MainCtaSectionData::class.java,
+
+        "download:header" to DownloadHeaderSectionData::class.java,
+        "download:footer" to DownloadFooterSectionData::class.java,
+        "download:license" to DownloadLicenseSectionData::class.java,
     )
 
     fun deserialize(key: String, raw: Map<String, Any>): SectionData? {

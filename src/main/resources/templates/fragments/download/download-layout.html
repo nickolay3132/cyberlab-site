@@ -12,7 +12,7 @@
 
 <div th:fragment="footer(hint, link, browseLabel)" class="release-footer">
     <p th:utext="${hint}" class="install-hint"></p>
-    <a th:href="${link}" th:text="${browseLabel}" class="btn-secondary"></a>
+    <a th:href="${link}" th:text="${browseLabel}" target="_blank" class="btn-secondary"></a>
 </div>
 </body>
 </html>

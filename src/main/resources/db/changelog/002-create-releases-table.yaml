@@ -1,0 +1,57 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1756112824285-1
+      author: nickolay
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            tableName: releases
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_release
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: version
+                  type: VARCHAR(15)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: tag
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: date
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: notes
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: size
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: link
+                  type: VARCHAR(255)
+  - changeSet:
+      id: 1756112824285-2
+      author: nickolay
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addUniqueConstraint:
+            columnNames: version
+            constraintName: uc_release_version
+            tableName: releases
+
