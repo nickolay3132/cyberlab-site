@@ -1,8 +1,9 @@
-package store.technocyberlab.cyberlabsite.core.sections.data
+package store.technocyberlab.cyberlabsite.infrastructure.sections
 
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
+import store.technocyberlab.cyberlabsite.core.sections.data.SectionData
 import store.technocyberlab.cyberlabsite.core.sections.data.download.DownloadFooterSectionData
 import store.technocyberlab.cyberlabsite.core.sections.data.download.DownloadHeaderSectionData
 import store.technocyberlab.cyberlabsite.core.sections.data.download.DownloadLicenseSectionData

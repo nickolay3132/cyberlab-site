@@ -1,9 +1,9 @@
-package store.technocyberlab.cyberlabsite.controllers
+package store.technocyberlab.cyberlabsite.presentation.controllers
 
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
-import store.technocyberlab.cyberlabsite.core.entities.extensions.typedData
+import store.technocyberlab.cyberlabsite.infrastructure.entities.extensions.typedData
 import store.technocyberlab.cyberlabsite.core.repositories.ReleaseRepository
 import store.technocyberlab.cyberlabsite.core.repositories.SectionRepository
 import store.technocyberlab.cyberlabsite.core.sections.data.download.DownloadFooterSectionData
