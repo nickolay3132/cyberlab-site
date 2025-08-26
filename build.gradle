@@ -15,6 +15,12 @@ java {
 	}
 }
 
+bootJar {
+	archiveBaseName = 'app'
+	archiveVersion = ''
+	archiveClassifier = ''
+}
+
 repositories {
 	mavenCentral()
 }
