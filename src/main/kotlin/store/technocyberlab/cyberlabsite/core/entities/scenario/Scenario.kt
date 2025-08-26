@@ -20,9 +20,13 @@ data class Scenario(
     @Enumerated(EnumType.STRING)
     val difficulty: ScenarioDifficulty,
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "attack_type_id")
-    val attackType: AttackType,
+    @ManyToMany
+    @JoinTable(
+        name = "scenario_attack_types",
+        joinColumns = [JoinColumn(name = "scenario_id")],
+        inverseJoinColumns = [JoinColumn(name = "attack_type_id")]
+    )
+    val attackTypes: Set<AttackType> = emptySet(),
 
     @Column(name = "is_active", nullable = false)
     val isActive: Boolean,

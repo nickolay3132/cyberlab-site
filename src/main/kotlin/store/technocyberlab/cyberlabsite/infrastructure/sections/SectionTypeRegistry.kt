@@ -12,6 +12,7 @@ import store.technocyberlab.cyberlabsite.core.sections.data.main.MainClmtSection
 import store.technocyberlab.cyberlabsite.core.sections.data.main.MainCtaSectionData
 import store.technocyberlab.cyberlabsite.core.sections.data.main.MainFeaturesSectionData
 import store.technocyberlab.cyberlabsite.core.sections.data.main.MainRequirementsSectionData
+import store.technocyberlab.cyberlabsite.core.sections.data.scenarios.ScenariosHeaderSectionData
 
 object SectionTypeRegistry {
     private val objectMapper = jacksonObjectMapper()
@@ -28,6 +29,8 @@ object SectionTypeRegistry {
         "download:header" to DownloadHeaderSectionData::class.java,
         "download:footer" to DownloadFooterSectionData::class.java,
         "download:license" to DownloadLicenseSectionData::class.java,
+
+        "scenarios:header" to ScenariosHeaderSectionData::class.java,
     )
 
     fun deserialize(key: String, raw: Map<String, Any>): SectionData? {

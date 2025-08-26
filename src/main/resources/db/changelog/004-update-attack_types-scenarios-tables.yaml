@@ -1,0 +1,62 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1756203285375-4
+      author: nickolay
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - dropForeignKeyConstraint:
+            baseTableName: scenarios
+            constraintName: fk_scenarios_on_attack_type
+  - changeSet:
+      id: 1756203285375-1
+      author: nickolay
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_scenario_attack_types
+                  name: attack_type_id
+                  type: INT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_scenario_attack_types
+                  name: scenario_id
+                  type: UUID
+            tableName: scenario_attack_types
+  - changeSet:
+      id: 1756203285375-2
+      author: nickolay
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: attack_type_id
+            baseTableName: scenario_attack_types
+            constraintName: fk_sceatttyp_on_attack_type
+            referencedColumnNames: id
+            referencedTableName: attack_types
+  - changeSet:
+      id: 1756203285375-3
+      author: nickolay
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: scenario_id
+            baseTableName: scenario_attack_types
+            constraintName: fk_sceatttyp_on_scenario
+            referencedColumnNames: id
+            referencedTableName: scenarios
+  - changeSet:
+      id: 1756203285375-5
+      author: nickolay
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - dropColumn:
+            columnName: attack_type_id
+            tableName: scenarios
+

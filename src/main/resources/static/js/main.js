@@ -93,6 +93,19 @@ document.addEventListener('DOMContentLoaded', function() {
         })
     }
 
+    document.querySelectorAll('[data-search]').forEach((input) => {
+        let timeoutId;
+
+        input.addEventListener('input', () => {
+            clearTimeout(timeoutId);
+
+            timeoutId = setTimeout(() => {
+                console.log(`Введено в ${input.getAttribute('data-search')}:`, input.value);
+                console.log(`Url: ${input.getAttribute('data-url')}`)
+            }, 1000);
+        });
+    });
+
 
     document.querySelectorAll('[data-dropdown]').forEach(dropdown => {
         const toggle = dropdown.querySelector('[data-toggle]');

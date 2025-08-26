@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scenarios Layout</title>
+</head>
+<body>
+<th:block th:fragment="header(title, subtitle)">
+    <h2 th:text="${title}">Header Title</h2>
+    <p th:text="${subtitle}" class="section-description" style="text-align: left">Header Subtitle</p>
+</th:block>
+
+</body>
+</html>

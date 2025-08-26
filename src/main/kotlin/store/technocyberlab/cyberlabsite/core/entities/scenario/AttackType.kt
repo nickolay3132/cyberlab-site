@@ -13,4 +13,7 @@ data class AttackType (
 
     @Column
     val description: String? = null,
+
+    @ManyToMany(mappedBy = "attackTypes")
+    val scenarios: Set<Scenario> = emptySet()
 )

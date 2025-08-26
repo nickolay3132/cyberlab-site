@@ -7,51 +7,40 @@
 <header th:replace="~{layout :: navigation}"></header>
 
 <section class="container" style="padding:5rem 20px">
-    <h2>Training Scenarios</h2>
-    <p class="section-description" style="text-align: left">Search by name, filter by difficulty or attack type, and choose a scenario to begin your hands-on training.</p>
+<!--    <h2>Training Scenarios</h2>-->
+<!--    <p class="section-description" style="text-align: left">Search by name, filter by difficulty or attack type, and choose a scenario to begin your hands-on training.</p>-->
+    <th:block th:if="${header}">
+        <div th:replace="~{fragments/scenarios/scenarios-layout :: header(
+            title=${header.title},
+            subtitle=${header.subtitle}
+        )}"></div>
+    </th:block>
 
     <div class="scenario-filters">
-        <!-- Search Input -->
-        <div class="form-group">
-            <label for="scenario-search">Scenario Name</label>
-            <div class="floating-placeholder">
-                <input type="text" id="scenario-search" placeholder="🔍 Search by scenario name..." />
-            </div>
-        </div>
+        <th:block th:if="${search}">
+            <div th:replace="~{fragments/scenarios/scenario-filters :: search(
+                id=${search['id']},
+                label=${search['label']},
+                placeholder=${search['placeholder']}
+            )}"></div>
+        </th:block>
 
-        <!-- Dropdowns -->
         <div class="scenario-selects">
-            <!-- Difficulty -->
-            <div class="form-group">
-                <label for="difficulty-dropdown">Difficulty</label>
-                <div class="dropdown" id="difficulty-dropdown" data-dropdown="difficulty">
-                    <button class="dropdown-toggle" data-toggle>
-                        <span class="dropdown-label">All</span>
-                        <span class="dropdown-arrow">▾</span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li data-value="easy">Easy</li>
-                        <li data-value="medium">Medium</li>
-                        <li data-value="hard">Hard</li>
-                    </ul>
-                </div>
-            </div>
+            <th:block th:if="${difficultySelect}">
+                <div th:replace="~{fragments/scenarios/scenario-filters :: select(
+                    id=${difficultySelect['dropdownId']},
+                    label=${difficultySelect['label']},
+                    options=${difficultySelect['options']}
+                )}"></div>
+            </th:block>
 
-            <!-- Attack Type -->
-            <div class="form-group">
-                <label for="attack-dropdown">Attack Type</label>
-                <div class="dropdown" id="attack-dropdown" data-dropdown="attack_type">
-                    <button class="dropdown-toggle" data-toggle>
-                        <span class="dropdown-label">All</span>
-                        <span class="dropdown-arrow">▾</span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li data-value="phishing">Phishing</li>
-                        <li data-value="priv_esc">Privilege Escalation</li>
-                        <li data-value="web_exploit">Web Exploitation</li>
-                    </ul>
-                </div>
-            </div>
+            <th:block th:if="${attackSelect}">
+                <div th:replace="~{fragments/scenarios/scenario-filters :: select(
+                    id=${attackSelect['dropdownId']},
+                    label=${attackSelect['label']},
+                    options=${attackSelect['options']}
+                )}"></div>
+            </th:block>
         </div>
     </div>
 
