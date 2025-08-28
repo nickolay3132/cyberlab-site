@@ -18,12 +18,12 @@
         margin-left: 0;
     }
 
-    .scenario-filters {
-        justify-content: center;
-        padding: 0 20px;
-    }
+    /*.scenario-filters {*/
+    /*    justify-content: center;*/
+    /*    padding: 0 20px;*/
+    /*}*/
 
-    .scenario-selects {
-        justify-content: center;
-    }
+    /*.scenario-selects {*/
+    /*    justify-content: center;*/
+    /*}*/
 }

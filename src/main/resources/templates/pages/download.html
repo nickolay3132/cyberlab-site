@@ -6,22 +6,23 @@
 <body>
 <header th:replace="~{layout :: navigation}"></header>
 
-<section th:fragment="section" class="releases">
-    <div class="container">
-        <th:block th:if="${header}">
-            <th:block
-                th:replace="~{fragments/download/download-layout :: header(
+<main class="content">
+    <section th:fragment="section" class="releases">
+        <div class="container">
+            <th:block th:if="${header}">
+                <th:block
+                        th:replace="~{fragments/download/download-layout :: header(
                     title=${header.title},
                     subtitle=${header.subtitle}
                 )}"
-            ></th:block>
-        </th:block>
+                ></th:block>
+            </th:block>
 
 
-        <div class="grid">
-            <th:block th:each="release : ${releases}">
-                <div
-                    th:replace="~{fragments/download/release-card :: card(
+            <div class="grid">
+                <th:block th:each="release : ${releases}">
+                    <div
+                            th:replace="~{fragments/download/release-card :: card(
                         version=${release.version},
                         tag=${release.tag.tag},
                         date=${release.date},
@@ -29,35 +30,35 @@
                         size=${release.size},
                         link=${release.link}
                     )}"
-                ></div>
-            </th:block>
-            <div th:if="${#lists.isEmpty(releases)}" class="no-releases">
-                <p>No releases available at the moment. Please check back later.</p>
+                    ></div>
+                </th:block>
+                <div th:if="${#lists.isEmpty(releases)}" class="no-releases">
+                    <p>No releases available at the moment. Please check back later.</p>
+                </div>
             </div>
-        </div>
 
-        <th:block th:if="${footer}">
-            <div
-                th:replace="~{fragments/download/download-layout :: footer(
+            <th:block th:if="${footer}">
+                <div
+                        th:replace="~{fragments/download/download-layout :: footer(
                     hint=${footer.hint},
                     link=${footer.link},
                     browseLabel=${footer.browseLabel}
                 )}"
-            ></div>
-        </th:block>
+                ></div>
+            </th:block>
 
-    </div>
-</section>
+        </div>
+    </section>
 
-<th:block th:if="${license}">
-    <section
-        th:replace="~{fragments/download/license :: license(
+    <th:block th:if="${license}">
+        <section
+                th:replace="~{fragments/download/license :: license(
             title=${license.title},
             text=${license.text}
         )}"
-    ></section>
-</th:block>
-
+        ></section>
+    </th:block>
+</main>
 
 <footer th:replace="~{layout :: footer}"></footer>
 

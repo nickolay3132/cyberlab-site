@@ -55,6 +55,7 @@ class ScenariosController(
         with(model) {
             addAttribute("header", header)
             addAttribute("search", search)
+            addAttribute("searchValue", title)
             addAttribute("difficultySelect", difficultySelect)
             addAttribute("attackSelect", attackSelect)
             addAttribute("scenarios", scenarios)
