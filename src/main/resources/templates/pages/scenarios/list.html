@@ -48,44 +48,13 @@
         <!-- Scenario Cards -->
         <div class="grid" data-scenarios-container>
             <th:block th:if="${scenarios.isEmpty()}">
-                <div class="card scenario-card empty-card">
-                    <div class="header">
-                        <h3>No scenarios found</h3>
-                    </div>
-                    <p class="description">Try adjusting your filters or check back later.</p>
-                </div>
+                <div th:replace="~{fragments/scenarios/scenario-cards :: empryCard}"></div>
             </th:block>
 
-            <div th:each="scenario : ${scenarios}" class="card scenario-card">
-                <div class="top">
-                    <div class="header">
-                        <h3 th:text="${scenario.title}">Scenario Title</h3>
-                        <span class="badge difficulty"
-                              th:classappend="'badge-' + ${scenario.lowerDifficulty}"
-                              th:text="${scenario.capitalizedDifficulty}">Medium</span>
-                    </div>
+            <div th:replace="~{fragments/scenarios/scenario-cards :: cards(scenarios=${scenarios})}"></div>
 
-                    <p class="description" th:text="${scenario.description}">Full description...</p>
-                </div>
-                <div class="bottom">
-                    <div class="attack-tags">
-                        <span th:each="at : ${scenario.attackTypes}"
-                              class="tag"
-                              th:title="${at.description}"
-                              th:text="${at.label}"
-                              th:attr="data-desc=${at.description}">Attack Type</span>
-                    </div>
-
-                    <a th:href="@{'/scenarios/' + ${scenario.id}}" class="btn-primary">Start Scenario</a>
-                </div>
-            </div>
         </div>
-
-        <dialog id="tagDialog">
-            <h3>Tag Description</h3>
-            <p id="dialogContent"></p>
-            <button onclick="document.getElementById('tagDialog').close()">Close</button>
-        </dialog>
+        <dialog th:replace="~{fragments/scenarios/scenario-cards :: tagModal}"></dialog>
     </section>
 </main>
 
