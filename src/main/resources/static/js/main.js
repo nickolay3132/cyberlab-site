@@ -107,6 +107,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    document.querySelector('[data-scenarios-container]')?.addEventListener('click', ev => {
+        const tag = ev.target.closest('[data-desc]');
+        if (tag) {
+            const dialog = document.getElementById('tagDialog');
+            const content = dialog.querySelector('#dialogContent');
+            content.textContent = tag.getAttribute('data-desc');
+            dialog.showModal();
+        }
+    })
+
 
     document.querySelectorAll('[data-scenario-dropdown]').forEach(dropdown => {
         const toggle = dropdown.querySelector('[data-toggle]');
@@ -172,7 +182,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         scenarios.forEach(scenario => {
             const tags = scenario.attackTypes.map(at =>
-                `<span class="tag" title="${at.description}">${at.label}</span>`
+                `<span class="tag" title="${at.description}" data-desc="${at.description}">${at.label}</span>`
             ).join('');
 
             grid.innerHTML += `
