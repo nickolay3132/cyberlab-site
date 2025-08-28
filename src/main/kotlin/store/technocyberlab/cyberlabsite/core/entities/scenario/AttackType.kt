@@ -1,5 +1,6 @@
 package store.technocyberlab.cyberlabsite.core.entities.scenario
 
+import com.fasterxml.jackson.annotation.JsonBackReference
 import jakarta.persistence.*
 
 @Entity
@@ -15,5 +16,6 @@ data class AttackType (
     val description: String? = null,
 
     @ManyToMany(mappedBy = "attackTypes")
+    @JsonBackReference
     val scenarios: Set<Scenario> = emptySet()
 )

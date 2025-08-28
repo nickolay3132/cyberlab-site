@@ -1,5 +1,6 @@
 package store.technocyberlab.cyberlabsite.core.entities.scenario
 
+import com.fasterxml.jackson.annotation.JsonManagedReference
 import jakarta.persistence.*
 import store.technocyberlab.cyberlabsite.core.enums.scenario.ScenarioDifficulty
 import java.util.UUID
@@ -20,14 +21,26 @@ data class Scenario(
     @Enumerated(EnumType.STRING)
     val difficulty: ScenarioDifficulty,
 
+    @Column(name = "is_active", nullable = false)
+    val isActive: Boolean,
+) {
     @ManyToMany
+    @JsonManagedReference
     @JoinTable(
         name = "scenario_attack_types",
         joinColumns = [JoinColumn(name = "scenario_id")],
         inverseJoinColumns = [JoinColumn(name = "attack_type_id")]
     )
-    val attackTypes: Set<AttackType> = emptySet(),
+    lateinit var attackTypes: MutableSet<AttackType>
 
-    @Column(name = "is_active", nullable = false)
-    val isActive: Boolean,
-)
+    fun shortDescription(): String {
+        return if (description.length > 15) {
+            description.substring(0, 70).trim() + "..."
+        } else {
+            description
+        }
+    }
+
+    fun getLowerDifficulty(): String = difficulty.name.lowercase()
+    fun getCapitalizedDifficulty(): String = difficulty.name.lowercase().replaceFirstChar { it.uppercase() }
+}

@@ -47,27 +47,34 @@
 
     <!-- Scenario Cards -->
     <div class="grid">
-        <div th:each="i : ${#numbers.sequence(1, 5)}" class="card scenario-card">
-            <h3>Phishing Simulation</h3>
-            <p>Simulate a phishing attack using a fake corporate login portal.</p>
-            <div class="scenario-meta">
-                <span class="badge badge-easy">Easy</span>
-                <span class="badge badge-phishing">Phishing</span>
+        <th:block th:if="${scenarios.isEmpty()}">
+            <div class="card scenario-card empty-card">
+                <div class="header">
+                    <h3>No scenarios found</h3>
+                </div>
+                <p class="description">Try adjusting your filters or check back later.</p>
             </div>
-            <a href="/scenarios/phishing-sim" class="btn-primary" style="margin-top:1rem; transform: none">Start Scenario</a>
-        </div>
+        </th:block>
 
-        <div th:each="i : ${#numbers.sequence(1, 5)}" class="card scenario-card">
-            <h3>Privilege Escalation Lab</h3>
-            <p>Explore Linux vulnerabilities for privilege escalation.</p>
-            <div class="scenario-meta">
-                <span class="badge badge-medium">Medium</span>
-                <span class="badge badge-priv_esc">Privilege Escalation</span>
+        <div th:each="scenario : ${scenarios}" class="card scenario-card">
+            <div class="header">
+                <h3 th:text="${scenario.title}">Scenario Title</h3>
+                <span class="badge difficulty"
+                      th:classappend="'badge-' + ${scenario.lowerDifficulty}"
+                      th:text="${scenario.capitalizedDifficulty}">Medium</span>
             </div>
-            <a href="/scenarios/priv-esc-lab" class="btn-primary" style="margin-top:1rem; transform: none">Start Scenario</a>
-        </div>
 
-        <!-- Add more scenario cards as needed -->
+            <p class="description" th:text="${scenario.description}">Full description...</p>
+
+            <div class="attack-tags">
+                <span th:each="at : ${scenario.attackTypes}"
+                      class="tag"
+                      th:title="${at.description}"
+                      th:text="${at.label}">Attack Type</span>
+            </div>
+
+            <a th:href="@{'/scenarios/' + ${scenario.id}}" class="btn-primary">Start Scenario</a>
+        </div>
     </div>
 </section>
 
