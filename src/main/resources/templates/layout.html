@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:fragment="head(title)">
+<head th:fragment="head(title, page)">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${title}">Layout</title>
+
     <link rel="stylesheet" th:href="@{/css/main.css}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <th:block th:switch="${page}">
+        <link rel="stylesheet" th:case="main" th:href="@{/css/sections/main_sections.css}">
+        <link rel="stylesheet" th:case="download" th:href="@{/css/sections/download_section.css}">
+        <link rel="stylesheet" th:case="scenarios" th:href="@{/css/sections/scenarios.css}">
+    </th:block>
+    <link rel="preload"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          as="style"
+          onload="this.rel='stylesheet'"
+    >
 </head>
 <body>
 <th:block th:fragment="navigation">
@@ -100,7 +110,7 @@
 </footer>
 
 <th:block th:fragment="scripts">
-    <script th:src="@{/js/main.js}" type="module"></script>
+    <script th:src="@{/js/main.js}" type="module" defer></script>
 </th:block>
 
 </body>

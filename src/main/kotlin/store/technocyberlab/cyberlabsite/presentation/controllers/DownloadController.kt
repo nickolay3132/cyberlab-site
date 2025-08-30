@@ -29,14 +29,18 @@ class DownloadController (
             .findByPageAndSection("download", "license")
             ?.typedData<DownloadLicenseSectionData>()
 
+        val releases = releaseRepository.findAll()
+
+
         with(model) {
+            addAttribute("page", "download")
+
             addAttribute("header", headerSection)
             addAttribute("footer", footerSection)
             addAttribute("license", licenseSection)
-        }
 
-        val releases = releaseRepository.findAll()
-        model.addAttribute("releases", releases)
+            addAttribute("releases", releases)
+        }
 
         return "pages/download"
     }

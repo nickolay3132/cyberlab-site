@@ -23,7 +23,7 @@
     color: var(--gray-color);
 }
 
-.scenario-card .top .header {
+.header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -31,14 +31,14 @@
     gap: 0.5rem;
 }
 
-.scenario-card .top .header h3 {
+.header h3 {
     font-size: 1.25rem;
     margin: 0;
     flex: 1;
     color: var(--primary-dark);
 }
 
-.scenario-card .top .badge.difficulty {
+.badge.difficulty {
     padding: 0.25rem 0.75rem;
     border-radius: 999px;
     font-size: 0.875rem;
@@ -46,23 +46,23 @@
     color: white;
 }
 
-.scenario-card .top .badge.difficulty.badge-easy   { background-color: var(--secondary-color); }
-.scenario-card .top .badge.difficulty.badge-medium { background-color: #f59e0b; }
-.scenario-card .top .badge.difficulty.badge-hard   { background-color: var(--danger-color); }
+.badge.difficulty.badge-easy   { background-color: var(--secondary-color); }
+.badge.difficulty.badge-medium { background-color: #f59e0b; }
+.badge.difficulty.badge-hard   { background-color: var(--danger-color); }
 
-.scenario-card .top .description {
+.description {
     font-size: 0.95rem;
     line-height: 1.5;
     color: var(--gray-color);
 }
 
-.scenario-card .bottom .attack-tags {
+.attack-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
 }
 
-.scenario-card .bottom .attack-tags .tag {
+.attack-tags .tag {
     background-color: #e2e8f0;
     color: var(--dark-color);
     padding: 0.25rem 0.75rem;
@@ -73,14 +73,14 @@
     transition: background-color 0.2s ease;
 }
 
-.scenario-card .bottom .attack-tags .tag:hover {
+.attack-tags .tag:hover {
     background-color: #cbd5e1;
 }
 
-.scenario-card .bottom .btn-primary {
+.btn-primary {
     align-self: flex-start;
 }
 
-.scenario-card .bottom .btn-primary:hover {
+.btn-primary:hover {
     transform: none;
 }

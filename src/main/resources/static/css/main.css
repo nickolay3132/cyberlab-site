@@ -7,8 +7,8 @@
 @import "layout/header_and_hero.css";
 @import "layout/footer.css";
 
-@import "sections/main_sections.css";
-@import "sections/download_section.css";
-@import "sections/scenarios.css";
+/*@import "sections/main_sections.css";*/
+/*@import "sections/download_section.css";*/
+/*@import "sections/scenarios.css";*/
 
 @import "responsive/768px.css";

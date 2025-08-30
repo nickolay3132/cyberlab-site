@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="~{layout :: head(title='CyberLab - Training Scenarios')}">
+<head th:replace="~{layout :: head(title='CyberLab - Training Scenarios', page=${page})}">
     <title>CyberLab - Training Scenarios</title>
 </head>
 <body>
@@ -10,36 +10,36 @@
     <section class="container" style="padding:5rem 20px">
         <th:block th:if="${header}">
             <div th:replace="~{fragments/scenarios/scenarios-layout :: header(
-            title=${header.title},
-            subtitle=${header.subtitle}
-        )}"></div>
+                title=${header.title},
+                subtitle=${header.subtitle}
+            )}"></div>
         </th:block>
 
         <div class="scenario-filters">
             <th:block th:if="${search}">
                 <div th:replace="~{fragments/scenarios/scenario-filters :: search(
-                id=${search['id']},
-                label=${search['label']},
-                placeholder=${search['placeholder']},
-                value=${searchValue}
-            )}"></div>
+                    id=${search['id']},
+                    label=${search['label']},
+                    placeholder=${search['placeholder']},
+                    value=${searchValue}
+                )}"></div>
             </th:block>
 
             <div class="scenario-selects">
                 <th:block th:if="${difficultySelect}">
                     <div th:replace="~{fragments/scenarios/scenario-filters :: select(
-                    id=${difficultySelect['dropdownId']},
-                    label=${difficultySelect['label']},
-                    options=${difficultySelect['options']}
-                )}"></div>
+                        id=${difficultySelect['dropdownId']},
+                        label=${difficultySelect['label']},
+                        options=${difficultySelect['options']}
+                    )}"></div>
                 </th:block>
 
                 <th:block th:if="${attackSelect}">
                     <div th:replace="~{fragments/scenarios/scenario-filters :: select(
-                    id=${attackSelect['dropdownId']},
-                    label=${attackSelect['label']},
-                    options=${attackSelect['options']}
-                )}"></div>
+                        id=${attackSelect['dropdownId']},
+                        label=${attackSelect['label']},
+                        options=${attackSelect['options']}
+                    )}"></div>
                 </th:block>
             </div>
         </div>

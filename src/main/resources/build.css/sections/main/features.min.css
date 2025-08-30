@@ -1,0 +1,1 @@
+.features{padding:5rem 0;background-color:#f8fafc}.feature-card{transition:transform .3s ease,box-shadow .3s ease;opacity:0;transform:translateY(20px)}.feature-card.animate{opacity:1;transform:translateY(0)}.feature-icon{font-size:2.5rem;color:var(--primary-color);margin-bottom:1rem}

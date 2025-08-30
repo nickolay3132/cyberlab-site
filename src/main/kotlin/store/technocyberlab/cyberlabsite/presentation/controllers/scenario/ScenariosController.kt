@@ -53,11 +53,15 @@ class ScenariosController(
         val scenarios: List<Scenario> = scenarioSearchService.getFiltered(title, difficulty, attackTypeLabel)
 
         with(model) {
+            addAttribute("page", "scenarios")
+
             addAttribute("header", header)
             addAttribute("search", search)
+
             addAttribute("searchValue", title)
             addAttribute("difficultySelect", difficultySelect)
             addAttribute("attackSelect", attackSelect)
+
             addAttribute("scenarios", scenarios)
         }
         return "pages/scenarios/list"

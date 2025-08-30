@@ -39,6 +39,8 @@ class MainController (
             ?.typedData<MainCtaSectionData>()
 
         with(model) {
+            addAttribute("page", "main")
+
             addAttribute("features", featuresSection)
             addAttribute("about", aboutSection)
             addAttribute("clmt", clmtSection)

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{layout :: head(title='CyberLab - Training Scenarios', page=${page})}">
+    <title>CyberLab - Training Scenarios</title>
+</head>
+<body>
+<style>
+    .badge.difficulty {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        border-radius: 999px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: white;
+        margin-bottom: 1rem;
+    }
+    .badge-medium { background-color: #f59e0b; }
+    .tag {
+        display: inline-block;
+        background-color: #e2e8f0;
+        color: var(--dark-color);
+        padding: 0.25rem 0.75rem;
+        border-radius: 999px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    #scenario-container {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
+<header th:replace="~{layout :: navigation}"></header>
+
+<main class="content">
+    <div class="container" id="scenario-container">
+        <div class="container__wrapper">
+            <header>
+                <h2 id="scenario-title">Consequences of not updating infrastructure</h2>
+                <span class="badge difficulty badge-medium">Medium</span>
+            </header>
+
+            <p id="scenario-description" class="section-description">
+                A perfect example that shows the importance of keeping infrastructure up to date. If you forget to install the latest patches, you may be vulnerable to attacks.
+            </p>
+
+            <div id="scenario-tags" style="margin-bottom:2rem;">
+                <span class="tag">Privilege Escalation</span>
+                <span class="tag">Credential Access</span>
+                <span class="tag">Command and Control</span>
+            </div>
+
+            <p style="color:var(--gray-color);font-size:0.875rem;margin-bottom:2rem;">Steps: 3</p>
+
+            <button class="btn-primary" id="start-btn">Start Scenario</button>
+        </div>
+
+    </div>
+</main>
+
+<script>
+    const steps = [
+        {
+            instruction: "Scan the vulnerable system and identify the open ports.",
+            expectedFlag: "FLAG{open_ports}"
+        },
+        {
+            instruction: "Exploit the outdated service to gain access.",
+            expectedFlag: "FLAG{exploit_success}"
+        },
+        {
+            instruction: "Establish persistence and exfiltrate data.",
+            expectedFlag: "FLAG{data_exfiltrated}"
+        }
+    ];
+
+    let currentStep = 0;
+
+    const container = document.getElementById("scenario-container");
+    const startBtn = document.getElementById("start-btn");
+
+    startBtn.addEventListener("click", () => {
+        renderStep(currentStep);
+    });
+
+    function renderStep(index) {
+        container.innerHTML = `
+      <h3>Step ${index + 1}</h3>
+      <p style="margin-bottom:1.5rem;">${steps[index].instruction}</p>
+      <div class="form-group" style="margin-bottom:1rem;">
+        <label for="flag-input">Enter flag:</label>
+        <input type="text" id="flag-input" placeholder="FLAG{...}" style="padding:0.75rem 1rem;font-size:1rem;border:1px solid var(--gray-color);border-radius:0.375rem;width:100%;">
+      </div>
+      <button class="btn-primary" id="submit-flag">Submit</button>
+      <p id="feedback" style="margin-top:1rem;font-size:0.875rem;"></p>
+    `;
+
+        document.getElementById("submit-flag").addEventListener("click", () => {
+            const userFlag = document.getElementById("flag-input").value.trim();
+            const feedback = document.getElementById("feedback");
+
+            if (userFlag === steps[index].expectedFlag) {
+                feedback.textContent = "✅ Correct flag!";
+                feedback.style.color = "green";
+                currentStep++;
+
+                if (currentStep < steps.length) {
+                    setTimeout(() => renderStep(currentStep), 1000);
+                } else {
+                    setTimeout(() => {
+                        container.innerHTML = `
+              <h3>🎉 Scenario Completed</h3>
+              <p>Well done! You’ve completed all steps.</p>
+            `;
+                    }, 1000);
+                }
+            } else {
+                feedback.textContent = "❌ Incorrect flag. Try again.";
+                feedback.style.color = "var(--danger-color)";
+            }
+        });
+    }
+</script>
+
+
+
+<footer th:replace="~{layout :: footer}"></footer>
+
+<script th:replace="~{layout :: scripts}"></script>
+
+</body>
+</html>
