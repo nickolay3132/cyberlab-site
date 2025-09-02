@@ -32,11 +32,12 @@ dependencies {
 	implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
 	implementation 'org.jetbrains.kotlin:kotlin-reflect'
 	implementation 'org.liquibase:liquibase-core'
+	implementation('org.springframework.security:spring-security-crypto:6.4.4')
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'org.postgresql:postgresql'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.jetbrains.kotlin:kotlin-test-junit5'
-	testImplementation 'org.springframework.security:spring-security-test'
+	testImplementation 'org.mockito.kotlin:mockito-kotlin:4.1.0'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 

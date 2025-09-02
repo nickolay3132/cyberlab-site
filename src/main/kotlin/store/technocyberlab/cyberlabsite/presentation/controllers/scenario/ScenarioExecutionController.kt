@@ -15,7 +15,7 @@ class ScenarioExecutionController {
         @PathVariable uuid: String
     ): String {
         with(model) {
-//            addAttribute("page", "scenarios")
+            addAttribute("page", "scenario")
         }
         return "pages/scenarios/scenario"
     }

@@ -1,0 +1,45 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1756727263653-1
+      author: nickolay
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_scenario_progresses
+                  name: id
+                  type: UUID
+              - column:
+                  name: session_id
+                  type: UUID
+              - column:
+                  name: scenario_id
+                  type: UUID
+              - column:
+                  constraints:
+                    nullable: false
+                  name: current_step
+                  type: INT
+              - column:
+                  name: started_at
+                  type: DATETIME
+              - column:
+                  name: completed_at
+                  type: DATETIME
+            tableName: scenario_progresses
+  - changeSet:
+      id: 1756727263653-2
+      author: nickolay
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: scenario_id
+            baseTableName: scenario_progresses
+            constraintName: FK_SCENARIO_PROGRESSES_ON_SCENARIO
+            referencedColumnNames: id
+            referencedTableName: scenarios
+

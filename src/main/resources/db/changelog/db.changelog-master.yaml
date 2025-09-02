@@ -7,3 +7,5 @@ databaseChangeLog:
       file: db/changelog/003-create-attack_types-scenario_steps-scenarios-tables.yaml
   - include:
       file: db/changelog/004-update-attack_types-scenarios-tables.yaml
+  - include:
+      file: db/changelog/005-create-scenario_progresses-table.yaml
