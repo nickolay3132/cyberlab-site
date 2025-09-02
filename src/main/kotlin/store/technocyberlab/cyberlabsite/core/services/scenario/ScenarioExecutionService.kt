@@ -4,8 +4,6 @@ import store.technocyberlab.cyberlabsite.core.entities.scenario.ScenarioStep
 import java.util.UUID
 
 interface ScenarioExecutionService {
-    fun createSession(setSessionId: (sessionId: UUID) -> Unit)
-
     fun isScenarioStarted(dto: DTO): Boolean
 
     fun startScenario(dto: DTO): StartResult

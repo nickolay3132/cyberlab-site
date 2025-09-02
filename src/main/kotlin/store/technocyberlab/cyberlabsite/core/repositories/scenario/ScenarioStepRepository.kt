@@ -9,4 +9,6 @@ import java.util.UUID
 interface ScenarioStepRepository : JpaRepository<ScenarioStep, UUID> {
     fun findByScenarioIdAndStepIndex(scenarioId: UUID, stepIndex: Int): ScenarioStep?
     fun existsByScenarioIdAndStepIndex(scenarioId: UUID, stepIndex: Int): Boolean
+    fun existsByScenarioId(scenarioId: UUID): Boolean
+    fun countByScenarioId(scenarioId: UUID): Long
 }

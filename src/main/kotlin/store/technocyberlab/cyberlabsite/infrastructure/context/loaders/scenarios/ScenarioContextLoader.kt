@@ -40,4 +40,9 @@ class ScenarioContextLoader(
     fun deleteProgress(progress: ScenarioProgress) =
             scenarioProgressRepository.delete(progress)
     // END DELETE
+
+    // COUNT
+    fun countSteps(scenarioId: UUID): Long =
+        scenarioStepRepository.countByScenarioId(scenarioId)
+    // END COUNT
 }

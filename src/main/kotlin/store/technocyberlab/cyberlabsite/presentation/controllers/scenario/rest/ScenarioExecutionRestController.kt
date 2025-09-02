@@ -1,7 +1,5 @@
 package store.technocyberlab.cyberlabsite.presentation.controllers.scenario.rest
 
-import jakarta.servlet.http.Cookie
-import jakarta.servlet.http.HttpServletResponse
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -15,23 +13,7 @@ import java.util.UUID
 class ScenarioExecutionRestController(
     private val service: ScenarioExecutionService
 ) {
-
-    @PostMapping("/session")
-    fun createSession(response: HttpServletResponse): ResponseEntity<Void> {
-        service.createSession { sessionId ->
-            val cookie = Cookie("SESSION_ID", sessionId.toString()).apply {
-                isHttpOnly = true
-                secure = true
-                path = "/"
-            }
-
-            response.addCookie(cookie)
-        }
-
-        return ResponseEntity.noContent().build()
-    }
-
-    @GetMapping("/started")
+        @GetMapping("/started")
     fun isScenarioStarted(
         @RequestParam("scenario-id") scenarioId: UUID,
         @CookieValue("SESSION_ID") sessionId: UUID

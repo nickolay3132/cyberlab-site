@@ -12,12 +12,7 @@ import java.util.*
 class ScenarioExecutionServiceImpl(
     private val context: ScenarioContextLoader
 ) : ScenarioExecutionService {
-    override fun createSession(setSessionId: (sessionId: UUID) -> Unit) {
-        val sessionId = UUID.randomUUID()
-        setSessionId(sessionId)
-    }
-
-    override fun isScenarioStarted(dto: ScenarioExecutionService.DTO): Boolean {
+   override fun isScenarioStarted(dto: ScenarioExecutionService.DTO): Boolean {
         val scenario = context.loadScenario(dto.scenarioId) ?: return false
         return context.progressExists(scenario, dto.sessionId)
     }

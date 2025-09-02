@@ -3,31 +3,47 @@
 <head th:replace="~{layout :: head(title='CyberLab - Training Scenarios', page=${page})}">
     <title>CyberLab - Training Scenarios</title>
 </head>
-<body>
+<body th:attr="data-scenario-id=${scenario.id}, data-current-step=${currentStep}, data-total-steps=${totalSteps}">
 
 <header th:replace="~{layout :: navigation}"></header>
 
 <main class="content">
     <div class="container" id="scenario-container">
-        <div class="container__wrapper">
+        <div class="container__wrapper" style="padding-top: 1.5rem;">
             <header>
-                <h2 id="scenario-title">Consequences of not updating infrastructure</h2>
-                <span class="badge difficulty badge-medium">Medium</span>
+                <h2 id="scenario-title" th:text="${scenario.title}">Scenario Title</h2>
+                <span class="badge difficulty badge-medium"
+                      th:classappend="'badge-' + ${scenario.getLowerDifficulty()}"
+                      th:text="${scenario.getCapitalizedDifficulty()}"
+                >Scenario Difficulty</span>
             </header>
 
-            <p id="scenario-description" class="section-description">
-                A perfect example that shows the importance of keeping infrastructure up to date. If you forget to install the latest patches, you may be vulnerable to attacks.
-            </p>
+            <p id="scenario-description"
+               class="section-description"
+               style="text-align: left"
+               th:text="${scenario.description}"
+            >Scenario Description</p>
 
             <div id="scenario-tags" style="margin-bottom:2rem;">
-                <span class="tag">Privilege Escalation</span>
-                <span class="tag">Credential Access</span>
-                <span class="tag">Command and Control</span>
+                <th:block th:each="at : ${scenario.attackTypes}">
+                    <span class="tag"
+                          th:text="${at.label}"
+                    >Scenario Tag</span>
+                </th:block>
             </div>
 
-            <p style="color:var(--gray-color);font-size:0.875rem;margin-bottom:2rem;">Steps: 3</p>
+            <p class="steps"
+               th:text="'Progress: ' + ${currentStep} + ' of ' + ${totalSteps} + ' steps completed'"
+            >Scenario Steps</p>
 
-            <button class="btn-primary" id="start-btn">Start Scenario</button>
+            <th:block th:if="${!scenarioIsStarted}">
+                <button class="btn-primary" id="start-btn">Start Scenario</button>
+            </th:block>
+
+            <div th:if="${scenarioIsStarted}" class="scenario-actions">
+                <button class="btn-primary" id="continue-btn">Continue Scenario</button>
+                <button class="btn-secondary" id="restart-btn">Restart Scenario</button>
+            </div>
         </div>
 
     </div>
