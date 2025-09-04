@@ -7,16 +7,18 @@ import org.springframework.web.bind.annotation.RequestParam
 import store.technocyberlab.cyberlabsite.core.entities.scenario.Scenario
 import store.technocyberlab.cyberlabsite.core.repositories.SectionRepository
 import store.technocyberlab.cyberlabsite.core.repositories.scenario.AttackTypeRepository
+import store.technocyberlab.cyberlabsite.core.sections.data.MetaSectionData
 import store.technocyberlab.cyberlabsite.core.sections.data.scenarios.ScenariosHeaderSectionData
 import store.technocyberlab.cyberlabsite.core.services.scenario.ScenarioSearchService
 import store.technocyberlab.cyberlabsite.infrastructure.entities.extensions.typedData
+import store.technocyberlab.cyberlabsite.presentation.controllers.BaseController
 
 @Controller
 class ScenariosController(
     private val sectionRepository: SectionRepository,
     private val attackTypeRepository: AttackTypeRepository,
     private val scenarioSearchService: ScenarioSearchService
-) {
+) : BaseController() {
     @GetMapping("/scenarios")
     fun scenarios(
         model: Model,
@@ -24,6 +26,11 @@ class ScenariosController(
         @RequestParam(required = false) difficulty: String?,
         @RequestParam(required = false, name = "attack_type_label") attackTypeLabel: String?
     ): String {
+        val meta = sectionRepository
+            .findByPageAndSection("scenarios", "meta")
+            ?.typedData<MetaSectionData>()
+        meta?.url = getUrl()
+
         val header = sectionRepository
             .findByPageAndSection("scenarios", "header")
             ?.typedData<ScenariosHeaderSectionData>()
@@ -54,6 +61,7 @@ class ScenariosController(
 
         with(model) {
             addAttribute("page", "scenarios")
+            addAttribute("meta", meta)
 
             addAttribute("header", header)
             addAttribute("search", search)

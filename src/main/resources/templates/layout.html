@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:fragment="head(title, page)">
+<head th:fragment="head(title, page, meta)">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${title}">Layout</title>
@@ -17,6 +17,22 @@
           as="style"
           onload="this.rel='stylesheet'"
     >
+
+    <th:block th:if="${meta}">
+        <!-- SEO Essentials -->
+        <meta name="description" th:content="${meta.description}">
+        <meta name="keywords" th:content="${meta.keywords}">
+        <meta name="author" content="CyberLab Team">
+        <meta name="robots" content="index, follow">
+
+        <!-- Open Graph for social sharing -->
+        <meta property="og:title" th:content="${meta.title}">
+        <meta property="og:description" th:content="${meta.description}">
+        <meta property="og:url" th:content="${meta.url}">
+        <meta property="og:type" content="website">
+
+        <link rel="canonical" th:href="${meta.url}">
+    </th:block>
 </head>
 <body>
 <th:block th:fragment="navigation">

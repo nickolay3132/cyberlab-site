@@ -8,14 +8,17 @@ import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
+import store.technocyberlab.cyberlabsite.core.entities.scenario.Scenario
+import store.technocyberlab.cyberlabsite.core.sections.data.MetaSectionData
 import store.technocyberlab.cyberlabsite.core.services.scenario.ScenarioService
+import store.technocyberlab.cyberlabsite.presentation.controllers.BaseController
 import java.util.UUID
 
 @Controller
 @RequestMapping("/scenario")
 class ScenarioExecutionController(
     private val scenarioService: ScenarioService
-) {
+) : BaseController() {
     @GetMapping("/{uuid}")
     fun getScenario(
         request: HttpServletRequest,
@@ -40,8 +43,17 @@ class ScenarioExecutionController(
 
         val scenarioExtendedInfo = scenarioService.getScenario(sessionId, scenarioId)
 
+        val scenario: Scenario = scenarioExtendedInfo["scenario"] as Scenario
+        val meta = MetaSectionData(
+            title = "CyberLab Training Scenario - ${scenario.title}",
+            description = scenario.description,
+            keywords = scenario.attackTypes.joinToString(", ") { it.label },
+            url = getUrl()
+        )
+
         with(model) {
             addAttribute("page", "scenario")
+            addAttribute("meta", meta)
             addAttribute("scenario", scenarioExtendedInfo["scenario"])
             addAttribute("totalSteps", scenarioExtendedInfo["totalSteps"])
             addAttribute("currentStep", scenarioExtendedInfo["currentStep"])

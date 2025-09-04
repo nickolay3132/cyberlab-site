@@ -3,6 +3,7 @@ package store.technocyberlab.cyberlabsite.infrastructure.sections
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
+import store.technocyberlab.cyberlabsite.core.sections.data.MetaSectionData
 import store.technocyberlab.cyberlabsite.core.sections.data.SectionData
 import store.technocyberlab.cyberlabsite.core.sections.data.download.DownloadFooterSectionData
 import store.technocyberlab.cyberlabsite.core.sections.data.download.DownloadHeaderSectionData
@@ -20,6 +21,10 @@ object SectionTypeRegistry {
         .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
 
     private val registry: Map<String, Class<out SectionData>> = mapOf(
+        "main:meta" to MetaSectionData::class.java,
+        "download:meta" to MetaSectionData::class.java,
+        "scenarios:meta" to MetaSectionData::class.java,
+
         "main:features" to MainFeaturesSectionData::class.java,
         "main:about" to MainAboutSectionData::class.java,
         "main:clmt" to MainClmtSectionData::class.java,
