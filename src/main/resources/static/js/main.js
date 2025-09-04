@@ -1,6 +1,3 @@
-import "./scenarios/tags.js"
-import "./scenarios/filters.js"
-
 document.addEventListener('DOMContentLoaded', function() {
     const toggleBtn = document.querySelector('.menu-toggle');
     const dropdown = document.querySelector('.nav-dropdown-menu');

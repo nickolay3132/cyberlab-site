@@ -22,6 +22,6 @@ data class ScenarioProgress(
 
     val startedAt: Instant = Instant.now(),
 
-    val completedAt: Instant? = null
+    var completedAt: Instant? = null
 )
 

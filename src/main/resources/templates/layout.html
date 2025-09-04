@@ -7,10 +7,10 @@
 
     <link rel="stylesheet" th:href="@{/css/main.css}">
     <th:block th:switch="${page}">
-        <link rel="stylesheet" th:case="main" th:href="@{/css/sections/main_sections.css}">
-        <link rel="stylesheet" th:case="download" th:href="@{/css/sections/download_section.css}">
-        <link rel="stylesheet" th:case="scenarios" th:href="@{/css/sections/scenarios.css}">
-        <link rel="stylesheet" th:case="scenario" th:href="@{/css/sections/scenario.css}">
+        <link rel="stylesheet" th:case="main" th:href="@{/css/sections/main_sections.css}" media="print" onload="this.media='all'">
+        <link rel="stylesheet" th:case="download" th:href="@{/css/sections/download_section.css}" media="print" onload="this.media='all'">
+        <link rel="stylesheet" th:case="scenarios" th:href="@{/css/sections/scenarios.css}" media="print" onload="this.media='all'">
+        <link rel="stylesheet" th:case="scenario" th:href="@{/css/sections/scenario.css}" media="print" onload="this.media='all'">
     </th:block>
     <link rel="preload"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"

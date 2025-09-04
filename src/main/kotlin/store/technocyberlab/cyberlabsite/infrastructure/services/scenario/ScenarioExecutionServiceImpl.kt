@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional
 import store.technocyberlab.cyberlabsite.core.entities.scenario.ScenarioProgress
 import store.technocyberlab.cyberlabsite.core.services.scenario.ScenarioExecutionService
 import store.technocyberlab.cyberlabsite.infrastructure.context.loaders.scenarios.ScenarioContextLoader
+import java.time.Instant
 import java.util.*
 
 @Service
@@ -83,7 +84,10 @@ class ScenarioExecutionServiceImpl(
             return ScenarioExecutionService.AdvanceResult.InvalidFlag
         }
 
-        if (!nextStepExists) return ScenarioExecutionService.AdvanceResult.Completed
+        if (!nextStepExists) {
+            scenarioProgress.completedAt = Instant.now()
+            return ScenarioExecutionService.AdvanceResult.Completed
+        }
 
         scenarioProgress.currentStep = scenarioProgress.currentStep + 1
         context.saveProgress(scenarioProgress)

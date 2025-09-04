@@ -40,10 +40,18 @@
                 <button class="btn-primary" id="start-btn">Start Scenario</button>
             </th:block>
 
-            <div th:if="${scenarioIsStarted}" class="scenario-actions">
-                <button class="btn-primary" id="continue-btn">Continue Scenario</button>
-                <button class="btn-secondary" id="restart-btn">Restart Scenario</button>
-            </div>
+            <th:block th:if="${scenarioIsStarted and !scenarioIsCompleted}">
+                <div class="scenario-actions">
+                    <button class="btn-primary" id="continue-btn">Continue Scenario</button>
+                    <button class="btn-secondary" id="restart-btn">Restart Scenario</button>
+                </div>
+            </th:block>
+
+            <th:block th:if="${scenarioIsCompleted}">
+                <div class="scenario-actions">
+                    <button class="btn-primary" id="restart-btn">Restart Scenario</button>
+                </div>
+            </th:block>
         </div>
 
     </div>

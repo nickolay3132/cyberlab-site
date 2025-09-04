@@ -22,16 +22,22 @@ class ScenarioServiceImpl(
 
         var currentStep = 0
         var scenarioIsStarted = false
+        var scenarioIsCompleted = false
         if (progress != null) {
             currentStep = progress.currentStep
             scenarioIsStarted = true
+
+            if (progress.completedAt != null) {
+                scenarioIsCompleted = true
+            }
         }
 
         return mapOf(
             "scenario" to scenario,
             "totalSteps" to totalSteps,
             "currentStep" to currentStep,
-            "scenarioIsStarted" to scenarioIsStarted
+            "scenarioIsStarted" to scenarioIsStarted,
+            "scenarioIsCompleted" to scenarioIsCompleted
         )
     }
 }

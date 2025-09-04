@@ -46,6 +46,7 @@ class ScenarioExecutionController(
             addAttribute("totalSteps", scenarioExtendedInfo["totalSteps"])
             addAttribute("currentStep", scenarioExtendedInfo["currentStep"])
             addAttribute("scenarioIsStarted",  scenarioExtendedInfo["scenarioIsStarted"])
+            addAttribute("scenarioIsCompleted",  scenarioExtendedInfo["scenarioIsCompleted"])
         }
 
         return "pages/scenarios/scenario"
