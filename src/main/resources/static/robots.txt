@@ -1,3 +1,3 @@
 User-agent: *
 Disallow: /api/
-Sitemap: https://ваш-домен.com/sitemap.xml
+Sitemap: https://techno-cyber-lab.store/sitemap.xml
