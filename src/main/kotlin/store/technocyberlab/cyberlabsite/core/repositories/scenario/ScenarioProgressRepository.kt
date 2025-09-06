@@ -10,4 +10,5 @@ import java.util.UUID
 interface ScenarioProgressRepository : JpaRepository<ScenarioProgress, UUID> {
     fun existsByScenarioAndSessionId(scenario: Scenario, sessionId: UUID): Boolean
     fun findByScenarioAndSessionId(scenario: Scenario, sessionId: UUID): ScenarioProgress?
+    fun findAllByScenario(scenario: Scenario): List<ScenarioProgress>
 }

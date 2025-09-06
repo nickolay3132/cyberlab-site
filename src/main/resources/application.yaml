@@ -33,5 +33,5 @@ spring:
       enabled: true
 
 server:
-  address: 0.0.0.0
+  address: localhost
   port: 8080

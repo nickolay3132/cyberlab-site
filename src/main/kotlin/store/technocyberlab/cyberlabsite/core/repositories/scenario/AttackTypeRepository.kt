@@ -9,4 +9,6 @@ import store.technocyberlab.cyberlabsite.core.entities.scenario.AttackType
 interface AttackTypeRepository : JpaRepository<AttackType, Int> {
     @Query("SELECT a.label FROM AttackType a")
     fun findAllLabels(): List<String>
+
+    fun findByLabel(label: String): AttackType?
 }

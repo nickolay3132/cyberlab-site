@@ -1,0 +1,11 @@
+databaseChangeLog:
+   - changeSet:
+      id: 1757180932288-2
+      author: nickolay
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addUniqueConstraint:
+            columnNames: label
+            constraintName: uc_attack_types_label
+            tableName: attack_types
+

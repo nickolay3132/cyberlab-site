@@ -89,7 +89,7 @@ class ScenarioExecutionServiceImpl(
             return ScenarioExecutionService.AdvanceResult.Completed
         }
 
-        scenarioProgress.currentStep = scenarioProgress.currentStep + 1
+        scenarioProgress.currentStep += 1
         context.saveProgress(scenarioProgress)
 
         val nextStep = context.loadStep(scenario, scenarioProgress.currentStep)

@@ -10,7 +10,7 @@ data class AttackType (
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @JsonIgnore
     var id: Int? = null,
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     val label: String,
 
     @Column
@@ -18,5 +18,5 @@ data class AttackType (
 
     @ManyToMany(mappedBy = "attackTypes")
     @JsonBackReference
-    val scenarios: Set<Scenario> = emptySet()
+    val scenarios: MutableSet<Scenario> = mutableSetOf()
 )
