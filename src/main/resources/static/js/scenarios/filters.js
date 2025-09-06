@@ -90,7 +90,7 @@ function renderScenarios(scenarios) {
                         </div>
                         <div class="bottom">
                             <div class="attack-tags">${tags}</div>
-                            <a href="/scenarios/${scenario.id}" class="btn-primary">Start Scenario</a>
+                            <a href="/scenario/${scenario.id}" class="btn-primary">Start Scenario</a>
                         </div>  
                     </div>
                 `;
