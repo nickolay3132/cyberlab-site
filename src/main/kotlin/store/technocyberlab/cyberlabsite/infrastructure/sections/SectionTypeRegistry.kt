@@ -3,6 +3,7 @@ package store.technocyberlab.cyberlabsite.infrastructure.sections
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
+import org.slf4j.LoggerFactory
 import store.technocyberlab.cyberlabsite.core.sections.data.MetaSectionData
 import store.technocyberlab.cyberlabsite.core.sections.data.SectionData
 import store.technocyberlab.cyberlabsite.core.sections.data.download.DownloadFooterSectionData
@@ -16,6 +17,8 @@ import store.technocyberlab.cyberlabsite.core.sections.data.main.MainRequirement
 import store.technocyberlab.cyberlabsite.core.sections.data.scenarios.ScenariosHeaderSectionData
 
 object SectionTypeRegistry {
+    private val logger = LoggerFactory.getLogger(SectionTypeRegistry::class.java)
+
     private val objectMapper = jacksonObjectMapper()
         .registerKotlinModule()
         .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
@@ -24,6 +27,7 @@ object SectionTypeRegistry {
         "main:meta" to MetaSectionData::class.java,
         "download:meta" to MetaSectionData::class.java,
         "scenarios:meta" to MetaSectionData::class.java,
+        "docs:meta" to MetaSectionData::class.java,
 
         "main:features" to MainFeaturesSectionData::class.java,
         "main:about" to MainAboutSectionData::class.java,
@@ -38,9 +42,21 @@ object SectionTypeRegistry {
         "scenarios:header" to ScenariosHeaderSectionData::class.java,
     )
 
-    fun deserialize(key: String, raw: Map<String, Any>): SectionData? {
-        val clazz = registry[key] ?: return null
-        val json = objectMapper.writeValueAsString(raw)
-        return runCatching { objectMapper.readValue(json, clazz) }.getOrNull()
+    fun deserialize(key: String, raw: Any?): SectionData? {
+        val clazz = registry[key]
+        if (clazz == null) {
+            logger.warn("Class for key '$key' not found")
+            return null
+        }
+
+        return try {
+            val result = objectMapper.convertValue(raw, clazz)
+
+            result
+        } catch (e: Exception) {
+            logger.warn("Deserialization error for key '$key': ${e.message}")
+            logger.debug("Raw object: {}", raw)
+            null
+        }
     }
 }
