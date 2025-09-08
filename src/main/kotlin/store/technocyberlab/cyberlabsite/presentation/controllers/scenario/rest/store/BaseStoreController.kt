@@ -14,7 +14,7 @@ abstract class BaseStoreController {
     private lateinit var apiSecret: String
 
     protected fun validateApiKey() {
-        val key = request.getHeader("X-Api-Key-Store")
+        val key = request.getHeader("X-Key")
         if (key != apiSecret) {
             throw ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid API key")
         }
