@@ -33,4 +33,8 @@ object ScenarioSpecifications {
             cb.like(cb.lower(root.get("title")), "%${title.lowercase()}%")
         }
     }
+
+    fun isActive(): Specification<Scenario>? = Specification {root, _, cb ->
+        cb.isTrue(root.get("isActive"))
+    }
 }

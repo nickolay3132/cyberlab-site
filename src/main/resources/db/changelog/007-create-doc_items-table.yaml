@@ -1,0 +1,42 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1757446716203-1
+      author: nickolay
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            tableName: doc_items
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_doc_items
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: question
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: answer
+                  type: TEXT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: is_active
+                  type: BOOLEAN
+  - changeSet:
+      id: 1757446716203-2
+      author: nickolay
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addUniqueConstraint:
+            columnNames: question
+            constraintName: uc_doc_items_question
+            tableName: doc_items
+

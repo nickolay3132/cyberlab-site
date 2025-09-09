@@ -6,7 +6,6 @@ import store.technocyberlab.cyberlabsite.core.repositories.scenario.ScenarioRepo
 import store.technocyberlab.cyberlabsite.core.repositories.scenario.ScenarioStepRepository
 import store.technocyberlab.cyberlabsite.core.services.scenario.ScenarioSearchService
 import store.technocyberlab.cyberlabsite.infrastructure.specifications.ScenarioSpecifications
-import java.util.UUID
 
 @Service
 class ScenarioSearchServiceImpl(
@@ -22,7 +21,8 @@ class ScenarioSearchServiceImpl(
         val specs = listOfNotNull(
             ScenarioSpecifications.titleContains(title),
             ScenarioSpecifications.hasAttackType(attackTypeLabel),
-            ScenarioSpecifications.difficultyEquals(difficulty)
+            ScenarioSpecifications.difficultyEquals(difficulty),
+            ScenarioSpecifications.isActive()
         )
 
         val combinedSpec = specs.reduceOrNull { acc, spec -> acc.and(spec) }

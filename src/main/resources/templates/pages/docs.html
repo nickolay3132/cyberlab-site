@@ -11,46 +11,12 @@
         <div class="container">
             <h2>Docs</h2>
             <div class="faq-grid">
-                <div class="faq-item" data-index="0">
+                <div th:each="item, iterStat : ${docItems}" class="faq-item" th:attr="data-index=${iterStat.index}">
                     <div class="faq-question">
-                        <span>🛠 How do I install CyberLab?</span>
+                        <span th:text="${item.question}">Question</span>
                         <span class="faq-toggle">▾</span>
                     </div>
-                    <div class="faq-answer">
-                        CyberLab can be installed via CLI or GUI.<br>
-                        Supported OS: Ubuntu 20.04+<br>
-                        Minimum: 4 CPU cores, 8 GB RAM, 100 GB SSD.
-                    </div>
-                </div>
-
-                <div class="faq-item" data-index="1">
-                    <div class="faq-question">
-                        <span>👥 What user roles are available?</span>
-                        <span class="faq-toggle">▾</span>
-                    </div>
-                    <div class="faq-answer">
-                        Admin, Analyst, Auditor, Guest. Role-based access control with scenario permissions.
-                    </div>
-                </div>
-
-                <div class="faq-item" data-index="2">
-                    <div class="faq-question">
-                        <span>📊 How can I monitor user activity?</span>
-                        <span class="faq-toggle">▾</span>
-                    </div>
-                    <div class="faq-answer">
-                        Real-time dashboards, audit logs, and scenario heatmaps. Exportable in JSON/CSV.
-                    </div>
-                </div>
-
-                <div class="faq-item" data-index="3">
-                    <div class="faq-question">
-                        <span>🔗 Can CyberLab integrate with SIEM?</span>
-                        <span class="faq-toggle">▾</span>
-                    </div>
-                    <div class="faq-answer">
-                        Yes. Supports syslog, Kafka, and RESTful push to external SIEMs like Splunk or ELK.
-                    </div>
+                    <div th:utext="${item.answer}" class="faq-answer">Answer</div>
                 </div>
             </div>
         </div>

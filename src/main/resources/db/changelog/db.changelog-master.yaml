@@ -11,3 +11,5 @@ databaseChangeLog:
       file: db/changelog/005-create-scenario_progresses-table.yaml
   - include:
       file: db/changelog/006-update-attack_types-table.yaml
+  - include:
+      file: db/changelog/007-create-doc_items-table.yaml

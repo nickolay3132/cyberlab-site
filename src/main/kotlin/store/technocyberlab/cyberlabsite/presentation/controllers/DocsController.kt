@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
+import store.technocyberlab.cyberlabsite.core.repositories.DocItemRepository
 import store.technocyberlab.cyberlabsite.core.repositories.SectionRepository
 import store.technocyberlab.cyberlabsite.core.sections.data.MetaSectionData
 import store.technocyberlab.cyberlabsite.infrastructure.entities.extensions.typedData
@@ -12,6 +13,7 @@ import store.technocyberlab.cyberlabsite.infrastructure.entities.extensions.type
 @RequestMapping("/docs")
 class DocsController(
     val sectionRepository: SectionRepository,
+    val docItemRepository: DocItemRepository,
 ) : BaseController() {
 
     @GetMapping
@@ -21,9 +23,12 @@ class DocsController(
             ?.typedData<MetaSectionData>()
         meta?.url = getUrl()
 
+        val docItems = docItemRepository.findAllByIsActiveTrue()
+
         with(model) {
             addAttribute("page", "docs")
             addAttribute("meta", meta)
+            addAttribute("docItems", docItems)
         }
         return "pages/docs"
     }
