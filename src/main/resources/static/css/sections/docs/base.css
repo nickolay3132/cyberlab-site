@@ -49,11 +49,12 @@
     position: absolute;
     top: 100%;
     left: 0;
-    width: 100%;
+    width: 100% !important;
+    max-width: 100% !important;
     background: white;
-    border-radius: 0 0 0.75rem 0.75rem;
-    box-shadow: 0 12px 16px rgba(0,0,0,0.1);
-    padding: 1rem 1.5rem;
+    border-radius: 0 0 0.75rem 0.75rem !important;
+    box-shadow: 0 12px 16px rgba(0,0,0,0.1) !important;
+    padding: 1rem 1.5rem !important;
     /*margin-top: 0.5rem;*/
     display: none;
     animation: fadeIn 0.3s ease-in-out;
