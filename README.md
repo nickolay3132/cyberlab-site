@@ -41,12 +41,12 @@ Content-Type: application/json
   "description": "String",
   "difficulty": Enum<"EASY", "MEDIUM", "HARD">,
   "isActive": Boolean,
-  "attackTypes": List<String>,
+  "attack_types": List<String>,
   "steps": [
     {
-      "stepIndex": Int (Starts From 1),
+      "step_index": Int (Starts From 1),
       "instruction": "String",
-      "expectedFlagHash": "String" (Will Be Hashed)
+      "expected_flag_hash": "String" (Will Be Hashed)
     }
   ]
 }
@@ -63,9 +63,9 @@ X-Key: some_secret_key
 Content-Type: application/json
 
 {
-  "stepIndex": Int (Step Index to Update Or Add),
+  "step_index": Int (Step Index to Update Or Add),
   "instruction": "String",
-  "expectedFlagHash": "String"
+  "expected_flag_hash": "String"
 }
 ```
 **Response:**
