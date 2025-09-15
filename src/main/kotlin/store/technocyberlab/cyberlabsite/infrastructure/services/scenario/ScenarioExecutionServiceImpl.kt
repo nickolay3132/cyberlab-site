@@ -3,57 +3,66 @@ package store.technocyberlab.cyberlabsite.infrastructure.services.scenario
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import store.technocyberlab.cyberlabsite.core.entities.scenario.Scenario
 import store.technocyberlab.cyberlabsite.core.entities.scenario.ScenarioProgress
 import store.technocyberlab.cyberlabsite.core.services.scenario.ScenarioExecutionService
-import store.technocyberlab.cyberlabsite.infrastructure.context.loaders.scenarios.ScenarioContextLoader
+import store.technocyberlab.cyberlabsite.infrastructure.services.scenario.daos.ScenarioDAO
+import store.technocyberlab.cyberlabsite.infrastructure.services.scenario.daos.ScenarioProgressDAO
+import store.technocyberlab.cyberlabsite.infrastructure.services.scenario.daos.ScenarioStepDAO
 import java.time.Instant
 import java.util.*
 
 @Service
 class ScenarioExecutionServiceImpl(
-    private val context: ScenarioContextLoader
+    private val scenarioDao: ScenarioDAO,
+    private val stepDao: ScenarioStepDAO,
+    private val progressDao: ScenarioProgressDAO,
 ) : ScenarioExecutionService {
-   override fun isScenarioStarted(dto: ScenarioExecutionService.DTO): Boolean {
-        val scenario = context.loadScenario(dto.scenarioId) ?: return false
-        return context.progressExists(scenario, dto.sessionId)
+
+    private fun prepareContext(
+        scenarioId: UUID,
+        sessionId: UUID
+    ): Scenario? = runCatching {
+        val scenario = scenarioDao.get(scenarioId, filter = { it.isActive })
+
+        stepDao.setScenario(scenario)
+        progressDao.setScenario(scenario)
+        progressDao.setSession(sessionId)
+
+        scenario
+    }.getOrNull()
+
+    override fun isScenarioStarted(dto: ScenarioExecutionService.DTO): Boolean {
+        return runCatching {
+            progressDao.setScenario(scenarioDao.get(dto.scenarioId))
+            progressDao.exists()
+        }.getOrNull() ?: false
     }
 
     @Transactional
     override fun startScenario(dto: ScenarioExecutionService.DTO): ScenarioExecutionService.StartResult {
-        // PREPARE DATA
-        val scenario = context.loadScenario(dto.scenarioId)
+        val scenario = prepareContext(dto.scenarioId, dto.sessionId)
             ?: return ScenarioExecutionService.StartResult.ScenarioNotFound
 
-        val scenarioProgress = ScenarioProgress(sessionId = dto.sessionId, scenario = scenario)
+        val progress = ScenarioProgress(
+            sessionId = dto.sessionId,
+            scenario = scenario,
+        )
+        progressDao.getOrNull()?.let { progressDao.delete(it) }
+        progressDao.save(progress)
 
-        val step = context.loadStep(scenario, scenarioProgress.currentStep)
-            ?: return ScenarioExecutionService.StartResult.ScenarioNotFound
-        // END PREPARE DATA
-
-
-        // LOGIC
-        val existingProgress = context.loadProgress(scenario, dto.sessionId)
-        if (existingProgress != null) {
-            context.deleteProgress(existingProgress)
-        }
-
-        context.saveProgress(scenarioProgress)
-        // END LOGIC
+        val step = stepDao.get(progress.currentStep)
 
         return ScenarioExecutionService.StartResult.Next(step)
     }
 
     override fun continueScenario(dto: ScenarioExecutionService.DTO): ScenarioExecutionService.ContinueResult {
-        // PREPARE DATA
-        val scenario = context.loadScenario(dto.scenarioId)
+        prepareContext(dto.scenarioId, dto.sessionId)
             ?: return ScenarioExecutionService.ContinueResult.ScenarioNotFound
 
-        val scenarioProgress = context.loadProgress(scenario, dto.sessionId)
-            ?: return ScenarioExecutionService.ContinueResult.InvalidSession
-
-        val step = context.loadStep(scenario, scenarioProgress.currentStep)
-            ?: return ScenarioExecutionService.ContinueResult.ScenarioNotFound
-        // END PREPARE DATA
+        val step = runCatching {
+            stepDao.get(progressDao.get().currentStep)
+        }.getOrNull() ?: return ScenarioExecutionService.ContinueResult.InvalidSession
 
         return ScenarioExecutionService.ContinueResult.Next(step)
     }
@@ -63,38 +72,28 @@ class ScenarioExecutionServiceImpl(
         dto: ScenarioExecutionService.DTO,
         flag: String
     ): ScenarioExecutionService.AdvanceResult {
-        // PREPARE DATA
-        val scenario = context.loadScenario(dto.scenarioId)
+        prepareContext(dto.scenarioId, dto.sessionId)
             ?: return ScenarioExecutionService.AdvanceResult.ScenarioNotFound
-
-        val scenarioProgress = context.loadProgress(scenario, dto.sessionId)
-            ?: return ScenarioExecutionService.AdvanceResult.InvalidSession
-
-        val step = context.loadStep(scenario, scenarioProgress.currentStep)
-            ?: return ScenarioExecutionService.AdvanceResult.InvalidFlag
-
-        val nextStepExists = context.stepExists(scenario, step.stepIndex + 1)
-
         val encoder = BCryptPasswordEncoder()
-        // END PREPARE DATA
 
+        val progress = runCatching { progressDao.get() }.getOrNull() ?: return ScenarioExecutionService.AdvanceResult.InvalidSession
+        val currentStep = stepDao.get(progress.currentStep)
 
-        // LOGIC
-        if (!encoder.matches(flag, step.expectedFlagHash)) {
+        if (!encoder.matches(flag, currentStep.expectedFlagHash)) {
             return ScenarioExecutionService.AdvanceResult.InvalidFlag
         }
 
-        if (!nextStepExists) {
-            scenarioProgress.completedAt = Instant.now()
+        progress.currentStep += 1
+
+        if (!stepDao.exists(progress.currentStep)) {
+            progress.completedAt = Instant.now()
             return ScenarioExecutionService.AdvanceResult.Completed
         }
 
-        scenarioProgress.currentStep += 1
-        context.saveProgress(scenarioProgress)
-
-        val nextStep = context.loadStep(scenario, scenarioProgress.currentStep)
-            ?: return ScenarioExecutionService.AdvanceResult.ScenarioNotFound
-        // END LOGIC
+        progressDao.save(progress)
+        val nextStep = runCatching {
+            stepDao.get(progress.currentStep)
+        }.getOrNull() ?: return ScenarioExecutionService.AdvanceResult.ScenarioNotFound
 
         return ScenarioExecutionService.AdvanceResult.Next(nextStep)
     }

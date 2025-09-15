@@ -51,15 +51,38 @@ class ScenarioProgressDAO(
         return found
     }
 
-    fun exists(
-        scenario: Scenario
-    ): Boolean {
-        return progressRepo.existsByScenarioAndSessionId(scenario, getSession())
+    @Throws(
+        SessionRequiredException::class,
+        ScenarioRequiredException::class,
+        ScenarioProgressNotFound::class
+    )
+    fun getOrNull(
+        filter: ((Scenario, ScenarioProgress?) -> Boolean)? = null,
+    ): ScenarioProgress? {
+        val scenario = getScenario()
+
+        val found = progressRepo.findByScenarioAndSessionId(scenario, getSession())
+
+        if (filter != null && !filter(scenario, found)) {
+            return null
+        }
+
+        return found
+    }
+
+    @Throws(
+        SessionRequiredException::class,
+        ScenarioRequiredException::class,
+    )
+    fun exists(): Boolean {
+        return progressRepo.existsByScenarioAndSessionId(getScenario(), getSession())
     }
 
     fun save(
         progress: ScenarioProgress,
     ): ScenarioProgress {
+        setSession(progress.sessionId)
+        setScenario(progress.scenario)
         return progressRepo.save(progress)
     }
 
