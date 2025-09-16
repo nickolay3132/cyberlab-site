@@ -1,16 +1,19 @@
 package store.technocyberlab.cyberlabsite.infrastructure.services.scenario
 
 import org.springframework.stereotype.Service
+import store.technocyberlab.cyberlabsite.core.entities.scenario.AttackType
 import store.technocyberlab.cyberlabsite.core.entities.scenario.Scenario
-import store.technocyberlab.cyberlabsite.core.repositories.scenario.ScenarioRepository
-import store.technocyberlab.cyberlabsite.core.repositories.scenario.ScenarioStepRepository
+import store.technocyberlab.cyberlabsite.core.enums.scenario.ScenarioDifficulty
 import store.technocyberlab.cyberlabsite.core.services.scenario.ScenarioSearchService
-import store.technocyberlab.cyberlabsite.infrastructure.specifications.ScenarioSpecifications
+import store.technocyberlab.cyberlabsite.infrastructure.services.scenario.daos.ScenarioDAO
+import store.technocyberlab.cyberlabsite.infrastructure.services.scenario.daos.ScenarioStepDAO
+import store.technocyberlab.cyberlabsite.infrastructure.specifications.ScenarioSpecs
+import store.technocyberlab.cyberlabsite.infrastructure.specifications.dsl.specs
 
 @Service
 class ScenarioSearchServiceImpl(
-    private val scenarioRepository: ScenarioRepository,
-    private val scenarioStepRepository: ScenarioStepRepository,
+    private val scenarioDao: ScenarioDAO,
+    private val stepDas: ScenarioStepDAO
 ) : ScenarioSearchService {
 
     override fun getFiltered(
@@ -18,17 +21,33 @@ class ScenarioSearchServiceImpl(
         difficulty: String?,
         attackTypeLabel: String?
     ): List<Scenario> {
-        val specs = listOfNotNull(
-            ScenarioSpecifications.titleContains(title),
-            ScenarioSpecifications.hasAttackType(attackTypeLabel),
-            ScenarioSpecifications.difficultyEquals(difficulty),
-            ScenarioSpecifications.isActive()
-        )
+        val specs = specs {
+            addIf(!title.isNullOrBlank()) {
+                ScenarioSpecs.containsTitle(title!!)
+            }
 
-        val combinedSpec = specs.reduceOrNull { acc, spec -> acc.and(spec) }
+            addIf(isNonBlankAndNotAll(difficulty)) {
+                val enum = ScenarioDifficulty.valueOf(difficulty!!.uppercase())
+                ScenarioSpecs.difficultyEquals(enum)
+            }
 
-        return scenarioRepository.findAll(combinedSpec).toList().filter { scenario ->
-            scenarioStepRepository.existsByScenarioId(scenario.id)
+            addIf(isNonBlankAndNotAll(attackTypeLabel)) {
+                val attackType = AttackType(label = attackTypeLabel!!)
+                ScenarioSpecs.attackTypeEquals(attackType)
+            }
+
+            add {
+                ScenarioSpecs.isActive()
+            }
         }
+
+        return scenarioDao.all(specs).filter { scenario ->
+            stepDas.setScenario(scenario)
+            stepDas.exists()
+        }
+    }
+
+    private fun isNonBlankAndNotAll(value: String?): Boolean {
+        return !value.isNullOrBlank() && !value.equals("all", ignoreCase = true)
     }
 }

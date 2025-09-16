@@ -32,7 +32,9 @@ class ScenarioExecutionServiceImpl(
         scenario
     }.getOrNull()
 
-    override fun isScenarioStarted(dto: ScenarioExecutionService.DTO): Boolean {
+    override fun isScenarioStarted(
+        dto: ScenarioExecutionService.DTO
+    ): Boolean {
         return runCatching {
             progressDao.setScenario(scenarioDao.get(dto.scenarioId))
             progressDao.exists()
@@ -40,7 +42,9 @@ class ScenarioExecutionServiceImpl(
     }
 
     @Transactional
-    override fun startScenario(dto: ScenarioExecutionService.DTO): ScenarioExecutionService.StartResult {
+    override fun startScenario(
+        dto: ScenarioExecutionService.DTO
+    ): ScenarioExecutionService.StartResult {
         val scenario = prepareContext(dto.scenarioId, dto.sessionId)
             ?: return ScenarioExecutionService.StartResult.ScenarioNotFound
 
@@ -56,7 +60,9 @@ class ScenarioExecutionServiceImpl(
         return ScenarioExecutionService.StartResult.Next(step)
     }
 
-    override fun continueScenario(dto: ScenarioExecutionService.DTO): ScenarioExecutionService.ContinueResult {
+    override fun continueScenario(
+        dto: ScenarioExecutionService.DTO
+    ): ScenarioExecutionService.ContinueResult {
         prepareContext(dto.scenarioId, dto.sessionId)
             ?: return ScenarioExecutionService.ContinueResult.ScenarioNotFound
 
@@ -74,12 +80,11 @@ class ScenarioExecutionServiceImpl(
     ): ScenarioExecutionService.AdvanceResult {
         prepareContext(dto.scenarioId, dto.sessionId)
             ?: return ScenarioExecutionService.AdvanceResult.ScenarioNotFound
-        val encoder = BCryptPasswordEncoder()
 
         val progress = runCatching { progressDao.get() }.getOrNull() ?: return ScenarioExecutionService.AdvanceResult.InvalidSession
         val currentStep = stepDao.get(progress.currentStep)
 
-        if (!encoder.matches(flag, currentStep.expectedFlagHash)) {
+        if (!BCryptPasswordEncoder().matches(flag, currentStep.expectedFlagHash)) {
             return ScenarioExecutionService.AdvanceResult.InvalidFlag
         }
 
